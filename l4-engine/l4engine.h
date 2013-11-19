@@ -38,5 +38,7 @@ struct chessboard_t {
     // last move?
 };
 
+struct chessboard_t chessboard_initial_state;
+
 
 #endif // L4_ENGINE_H
