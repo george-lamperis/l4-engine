@@ -1,19 +1,30 @@
-#include <iostream>
 #include <string>
+#include <iostream>
+
+#include "l4engine.h"
+
+#define DEBUG_LOG 1
 
 using namespace std;
 
-#define DEBUG_LOG 1
+void uci_input();
+
+int main ()
+{
+    
+    uci_input();
+
+	return 0;
+}
 
 void uci_identify()
 {
 
 }
 
-
-int main ()
+void uci_input()
 {
-	string Line; //to read the command given by the GUI
+    string Line; //to read the command given by the GUI
 	int flag =1; //to change the value of chess squares from 'a' to 'h'
 
 	cout.setf (ios::unitbuf);// Make sure that the outputs are sent straight away to the GUI
@@ -44,5 +55,7 @@ int main ()
 		}
 	}
 
-	return 0;
 }
+
+   
+
