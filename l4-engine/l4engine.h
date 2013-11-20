@@ -38,7 +38,13 @@ struct chessboard_t {
     // last move?
 };
 
+// const
 struct chessboard_t chessboard_initial_state;
+
+// -----------------------------------------------------------------------------
+// Bitboards and lookup tables
+// -----------------------------------------------------------------------------
+
 
 
 #endif // L4_ENGINE_H

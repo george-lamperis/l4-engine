@@ -71,6 +71,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="bitboard.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="uci.cpp" />
   </ItemGroup>
