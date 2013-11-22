@@ -13,7 +13,7 @@ void uci_input();
 
 int main ()
 {
-    
+
     uci_input();
 
 	return 0;
