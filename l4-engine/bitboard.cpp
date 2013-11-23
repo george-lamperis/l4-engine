@@ -131,7 +131,7 @@ bitboard_t square_mask(size_t sq)
 
 void print_bitboard(bitboard_t b) 
 {
-    cout << "\t   a   b   c   d   e   f   g   h  " << endl;
+    cout << "\t    a   b   c   d   e   f   g   h  " << endl;
     cout << "\t  +---+---+---+---+---+---+---+---+" << endl;
 
     for (int i = 56; i >= 0; i -= 8) {
@@ -151,7 +151,7 @@ void print_bitboard(bitboard_t b)
         cout << "\t  +---+---+---+---+---+---+---+---+" << endl;
     }
 
-    cout << "\t   a   b   c   d   e   f   g   h  " << endl;
+    cout << "\t    a   b   c   d   e   f   g   h  " << endl;
 }
 
 
