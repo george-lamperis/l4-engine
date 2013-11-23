@@ -99,9 +99,11 @@ enum eSquare {
 };
 
 // abstract the arrays away
-bitboard_t square_mask(size_t sq);
 bitboard_t rank_mask(size_t rank);
+bitboard_t file_mask(size_t file);
+bitboard_t square_mask(size_t sq);
 
+void print_bitboard(bitboard_t b);
 // ANDing with these results in a bitboard
 // with only the bits in that rank/file set.
 

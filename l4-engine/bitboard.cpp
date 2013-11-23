@@ -26,6 +26,7 @@ const bitboard_t Rank[8] = {
     0xFF00000000000000,     // rank 8
 };
 
+
 const bitboard_t File[8] = {
     0x0101010101010101,     // a-file
     0x0202020202020202,
@@ -37,8 +38,73 @@ const bitboard_t File[8] = {
     0x8080808080808080      //h-file
 };
 
-//const bitboard_t Square[64];
-bitboard_t Square[64];
+
+const bitboard_t Square[64] = {
+    File[FILE_A] & Rank[RANK_1],
+    File[FILE_B] & Rank[RANK_1],
+    File[FILE_C] & Rank[RANK_1],
+    File[FILE_D] & Rank[RANK_1],
+    File[FILE_E] & Rank[RANK_1],
+    File[FILE_F] & Rank[RANK_1],
+    File[FILE_G] & Rank[RANK_1],
+    File[FILE_H] & Rank[RANK_1],
+    File[FILE_A] & Rank[RANK_2],
+    File[FILE_B] & Rank[RANK_2],
+    File[FILE_C] & Rank[RANK_2],
+    File[FILE_D] & Rank[RANK_2],
+    File[FILE_E] & Rank[RANK_2],
+    File[FILE_F] & Rank[RANK_2],
+    File[FILE_G] & Rank[RANK_2],
+    File[FILE_H] & Rank[RANK_2],
+    File[FILE_A] & Rank[RANK_3],
+    File[FILE_B] & Rank[RANK_3],
+    File[FILE_C] & Rank[RANK_3],
+    File[FILE_D] & Rank[RANK_3],
+    File[FILE_E] & Rank[RANK_3],
+    File[FILE_F] & Rank[RANK_3],
+    File[FILE_G] & Rank[RANK_3],
+    File[FILE_H] & Rank[RANK_3],
+    File[FILE_A] & Rank[RANK_4],
+    File[FILE_B] & Rank[RANK_4],
+    File[FILE_C] & Rank[RANK_4],
+    File[FILE_D] & Rank[RANK_4],
+    File[FILE_E] & Rank[RANK_4],
+    File[FILE_F] & Rank[RANK_4],
+    File[FILE_G] & Rank[RANK_4],
+    File[FILE_H] & Rank[RANK_4],
+    File[FILE_A] & Rank[RANK_5],
+    File[FILE_B] & Rank[RANK_5],
+    File[FILE_C] & Rank[RANK_5],
+    File[FILE_D] & Rank[RANK_5],
+    File[FILE_E] & Rank[RANK_5],
+    File[FILE_F] & Rank[RANK_5],
+    File[FILE_G] & Rank[RANK_5],
+    File[FILE_H] & Rank[RANK_5],
+    File[FILE_A] & Rank[RANK_6],
+    File[FILE_B] & Rank[RANK_6],
+    File[FILE_C] & Rank[RANK_6],
+    File[FILE_D] & Rank[RANK_6],
+    File[FILE_E] & Rank[RANK_6],
+    File[FILE_F] & Rank[RANK_6],
+    File[FILE_G] & Rank[RANK_6],
+    File[FILE_H] & Rank[RANK_6],
+    File[FILE_A] & Rank[RANK_7],
+    File[FILE_B] & Rank[RANK_7],
+    File[FILE_C] & Rank[RANK_7],
+    File[FILE_D] & Rank[RANK_7],
+    File[FILE_E] & Rank[RANK_7],
+    File[FILE_F] & Rank[RANK_7],
+    File[FILE_G] & Rank[RANK_7],
+    File[FILE_H] & Rank[RANK_7],
+    File[FILE_A] & Rank[RANK_8],
+    File[FILE_B] & Rank[RANK_8],
+    File[FILE_C] & Rank[RANK_8],
+    File[FILE_D] & Rank[RANK_8],
+    File[FILE_E] & Rank[RANK_8],
+    File[FILE_F] & Rank[RANK_8],
+    File[FILE_G] & Rank[RANK_8],
+    File[FILE_H] & Rank[RANK_8]
+};
 
 
 // Brian Kernighan's way
@@ -65,6 +131,14 @@ bitboard_t rank_mask(size_t rank)
     return Rank[rank];
 }
 
+
+bitboard_t file_mask(size_t file)
+{
+    assert(file <= 8);
+    return File[file];
+}
+
+
 bitboard_t square_mask(size_t sq)
 {
     // assert nonnegative?
@@ -75,22 +149,24 @@ bitboard_t square_mask(size_t sq)
 
 void print_bitboard(bitboard_t b) 
 {
-    cout << "\t a b c d e f g h " << endl;
-    cout << "\t+---------------+" << endl;
+    cout << "\t  a   b   c   d   e   f   g   h  " << endl;
+    cout << "\t+---+---+---+---+---+---+---+---+" << endl;
 
     for (int i = 56; i >= 0; i -= 8) {
         cout << "\t";
 
         for (int j = 0; j < 8; j++ ) {
-            int bit = b & square_mask(i+j);
-            cout << setw(2) << bit << "|";
+            bitboard_t bit = b & square_mask(i+j);
+
+            if (bit)
+                cout << "| X ";
+            else
+                cout << "|   ";
         }
-    }
-       
-    for (int i = RANK_8; i >= RANK_1; i--) {
 
+        cout << "|" << endl;
+        cout << "\t+---+---+---+---+---+---+---+---+" << endl;
     }
 
-    cout << "\t+---------------+" << endl;
-    cout << "\t a b c d e f g h " << endl;
+    cout << "\t  a   b   c   d   e   f   g   h  " << endl;
 }
