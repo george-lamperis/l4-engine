@@ -159,7 +159,7 @@ void print_bitboard(bitboard_t b)
 // Consecutively reset LS1B in a loop body and counting loop cycles until the
 // bitset becomes empty. Brian Kernighan mentioned the trick in his and
 // Ritchie's book The C Programming_Language, 2nd Edition 1988, exercise 2-9.
-int popCount (bitboard_t x)
+int bit_count (bitboard_t x)
 {
     int count = 0;
     while (x) {

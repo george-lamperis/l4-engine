@@ -14,9 +14,7 @@ void uci_input();
 int main ()
 {
     
-    print_bitboard(rank_mask(RANK_1));
-    print_bitboard(file_mask(FILE_A));
-
+    print_bitboard(square_mask(65));
     uci_input();
 
 	return 0;
