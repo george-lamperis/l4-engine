@@ -98,13 +98,15 @@ enum eSquare {
     A8, B8, C8, D8, E8, F8, G8, H8
 };
 
-// abstract the arrays away
+// ANDing with these results in a bitboard
+// with only the bits in that rank/file set.
 bitboard_t rank_mask(size_t rank);
 bitboard_t file_mask(size_t file);
 bitboard_t square_mask(size_t sq);
 
 void print_bitboard(bitboard_t b);
-// ANDing with these results in a bitboard
-// with only the bits in that rank/file set.
+
+int bit_count(bitboard_t b);
+
 
 #endif // L4_ENGINE_H
