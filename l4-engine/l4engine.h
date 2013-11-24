@@ -13,37 +13,6 @@ void create_engine_thread();
 unsigned __stdcall engine_loop(void* pArguments);
 
 // -----------------------------------------------------------------------------
-// chess data
-// -----------------------------------------------------------------------------
-
-// TODO unsigned?
-typedef int64_t bitboard_t;
-
-struct chessboard_t {
-    bitboard_t w_pawns;
-    bitboard_t w_rooks;
-    bitboard_t w_knights;
-    bitboard_t w_bishops;    
-    bitboard_t w_queens;
-    bitboard_t w_king;
-
-    bitboard_t b_pawns;
-    bitboard_t b_rooks;
-    bitboard_t b_knights;
-    bitboard_t b_bishops;
-    bitboard_t b_queens;
-    bitboard_t b_king;
-
-    // can castle?
-    // en passant?
-    // whose turn?
-    // last move?
-};
-
-// const
-// struct chessboard_t chessboard_initial_state;
-
-// -----------------------------------------------------------------------------
 // Bitboards and lookup tables
 // implementation in bitboard.cpp
 // -----------------------------------------------------------------------------
@@ -83,6 +52,8 @@ struct chessboard_t {
 //      +----+----+----+
 // -----------------------------------------------------------------------------
 
+// TODO unsigned?
+typedef int64_t bitboard_t;
 
 enum eRank { RANK_1, RANK_2, RANK_3, RANK_4, RANK_5, RANK_6, RANK_7, RANK_8 };
 enum eFile { FILE_A, FILE_B, FILE_C, FILE_D, FILE_E, FILE_F, FILE_G, FILE_H };
@@ -107,6 +78,39 @@ bitboard_t square_mask(size_t sq);
 void print_bitboard(bitboard_t b);
 
 int bit_count(bitboard_t b);
+
+// -----------------------------------------------------------------------------
+// chess data
+// chess.cpp
+// -----------------------------------------------------------------------------
+
+struct chessboard_t {
+    bitboard_t w_pawns;
+    bitboard_t w_rooks;
+    bitboard_t w_knights;
+    bitboard_t w_bishops;
+    bitboard_t w_queens;
+    bitboard_t w_king;
+
+    bitboard_t b_pawns;
+    bitboard_t b_rooks;
+    bitboard_t b_knights;
+    bitboard_t b_bishops;
+    bitboard_t b_queens;
+    bitboard_t b_king;
+
+    // can castle?
+    // en passant?
+    // whose turn?
+    // last move?
+};
+
+// const
+const struct chessboard_t chess_initial_state = {
+    0x0,
+    rank_mask(RANK_2),
+
+};
 
 
 #endif // L4_ENGINE_H
