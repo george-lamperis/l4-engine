@@ -14,7 +14,6 @@ void uci_input();
 int main ()
 {
     
-    print_bitboard(square_mask(65));
     uci_input();
 
 	return 0;

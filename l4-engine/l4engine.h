@@ -13,8 +13,8 @@ void create_engine_thread();
 unsigned __stdcall engine_loop(void* pArguments);
 
 // -----------------------------------------------------------------------------
-// Bitboards and lookup tables
-// implementation in bitboard.cpp
+// chessboard.cpp
+// Bitboards and lookup tables and the chessboard data
 // -----------------------------------------------------------------------------
 //
 // LERF encoding
@@ -122,8 +122,19 @@ const struct chessboard_t chess_initial_state = {
 
 
     rank_mask(RANK_7),      // b_pawns
-
 };
+
+
+// -----------------------------------------------------------------------------
+// search.cpp
+// contains code which generates all legal moves
+// -----------------------------------------------------------------------------
+
+
+// -----------------------------------------------------------------------------
+// evaluate.cpp
+// contains logic to assign a score to a chess state.
+// -----------------------------------------------------------------------------
 
 
 #endif // L4_ENGINE_H
