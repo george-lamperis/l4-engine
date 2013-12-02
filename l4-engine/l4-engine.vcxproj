@@ -72,7 +72,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="bitboard.cpp" />
+    <ClCompile Include="evaluate.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="search.cpp" />
     <ClCompile Include="uci.cpp" />
   </ItemGroup>
   <ItemGroup>
