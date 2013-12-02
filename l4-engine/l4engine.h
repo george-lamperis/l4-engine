@@ -81,7 +81,6 @@ int bit_count(bitboard_t b);
 
 // -----------------------------------------------------------------------------
 // chess data
-// chess.cpp
 // -----------------------------------------------------------------------------
 
 struct chessboard_t {
@@ -99,16 +98,30 @@ struct chessboard_t {
     bitboard_t b_queens;
     bitboard_t b_king;
 
+    // at most one bit set. That bit  is the location
+    // of the pawn which moved two spaces forward.
+    bitboard_t w_enpassant;
+    bitboard_t b_enpassant;
+
     // can castle?
-    // en passant?
+    bool w_king_moved;
+    bool w_rook1_moved;
+    bool w_rook2_moved;
+
+    bool b_king_moved;
+    bool b_rook1_moved;
+    bool b_rook2_moved;
+
     // whose turn?
-    // last move?
+    bool whites_turn;
 };
 
-// const
+
 const struct chessboard_t chess_initial_state = {
-    0x0,
-    rank_mask(RANK_2),
+    rank_mask(RANK_2),      // w_pawns
+
+
+    rank_mask(RANK_7),      // b_pawns
 
 };
 
