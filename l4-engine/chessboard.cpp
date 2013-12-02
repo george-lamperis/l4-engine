@@ -123,7 +123,6 @@ bitboard_t file_mask(size_t file)
 
 bitboard_t square_mask(size_t sq)
 {
-    // assert nonnegative?
     assert(sq <= 63);
     return Square[sq];
 }
