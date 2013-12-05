@@ -154,17 +154,30 @@ void print_bitboard(bitboard_t b)
 }
 
 
-// Brian Kernighan's way
-// Consecutively reset LS1B in a loop body and counting loop cycles until the
-// bitset becomes empty. Brian Kernighan mentioned the trick in his and
-// Ritchie's book The C Programming_Language, 2nd Edition 1988, exercise 2-9.
-int bit_count (bitboard_t x)
+// QKRBNP for white pieces, lowercase for black
+// http://en.wikipedia.org/wiki/Forsyth%E2%80%93Edwards_Notation
+void print_chessboard(chessboard_t board)
 {
-    int count = 0;
-    while (x) {
-        count++;
-        x &= x - 1; // reset LS1B
+    cout << "\t    a   b   c   d   e   f   g   h  " << endl;
+    cout << "\t  +---+---+---+---+---+---+---+---+" << endl;
+
+    for (int i = 56; i >= 0; i -= 8) {
+        int rank = (i / 8) + 1;
+        cout << "\t" << rank << " ";
+
+        for (int j = 0; j < 8; j++ ) {
+            bitboard_t bit = board.w_bishops & square_mask(i+j);
+
+            if (bit)
+                cout << "| X ";
+            else
+                cout << "|   ";
+        }
+
+        cout << "| " << rank << endl;
+        cout << "\t  +---+---+---+---+---+---+---+---+" << endl;
     }
 
-    return count;
+    cout << "\t    a   b   c   d   e   f   g   h  " << endl;
 }
+

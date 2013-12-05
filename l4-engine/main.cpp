@@ -13,7 +13,8 @@ void uci_input();
 
 int main ()
 {
-    
+    chessboard_t board = chess_initial_state;
+    print_chessboard(board);
     uci_input();
 
 	return 0;

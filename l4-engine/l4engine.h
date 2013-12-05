@@ -76,12 +76,8 @@ bitboard_t file_mask(size_t file);
 bitboard_t square_mask(size_t sq);
 
 void print_bitboard(bitboard_t b);
+void print_chessboard(chessboard_t board);
 
-int bit_count(bitboard_t b);
-
-// -----------------------------------------------------------------------------
-// chess data
-// -----------------------------------------------------------------------------
 
 struct chessboard_t {
     bitboard_t w_pawns;
@@ -130,10 +126,17 @@ const struct chessboard_t chess_initial_state = {
 // contains code which generates all legal moves
 // -----------------------------------------------------------------------------
 
+int bit_count(bitboard_t b);
 
 // -----------------------------------------------------------------------------
 // evaluate.cpp
 // contains logic to assign a score to a chess state.
+// -----------------------------------------------------------------------------
+
+
+// -----------------------------------------------------------------------------
+// uci.cpp
+// contains functions for interfacing with UCI
 // -----------------------------------------------------------------------------
 
 
