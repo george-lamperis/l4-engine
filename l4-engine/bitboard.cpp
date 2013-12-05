@@ -106,6 +106,12 @@ const bitboard_t Square[64] = {
     File[FILE_H] & Rank[RANK_8]
 };
 
+const struct chessboard_t chess_initial_state = {
+    rank_mask(RANK_2),      // w_pawns
+
+
+    rank_mask(RANK_7),      // b_pawns
+};
 
 bitboard_t rank_mask(size_t rank)
 {

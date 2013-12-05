@@ -69,14 +69,6 @@ enum eSquare {
     A8, B8, C8, D8, E8, F8, G8, H8
 };
 
-// ANDing with these results in a bitboard
-// with only the bits in that rank/file set.
-bitboard_t rank_mask(size_t rank);
-bitboard_t file_mask(size_t file);
-bitboard_t square_mask(size_t sq);
-
-
-
 struct chessboard_t {
     bitboard_t w_pawns;
     bitboard_t w_rooks;
@@ -110,17 +102,17 @@ struct chessboard_t {
     bool whites_turn;
 };
 
+extern const struct chessboard_t chess_initial_state;
+
+// These functions defined in bitboard.cpp
+bitboard_t rank_mask(size_t rank);
+bitboard_t file_mask(size_t file);
+bitboard_t square_mask(size_t sq);
+
+chessboard_t move(eSquare src, eSquare dst, chessboard_t board);
 
 void print_bitboard(bitboard_t b);
 void print_chessboard(chessboard_t board);
-
-const struct chessboard_t chess_initial_state = {
-    rank_mask(RANK_2),      // w_pawns
-
-
-    rank_mask(RANK_7),      // b_pawns
-};
-
 
 // -----------------------------------------------------------------------------
 // search.cpp
@@ -128,6 +120,14 @@ const struct chessboard_t chess_initial_state = {
 // -----------------------------------------------------------------------------
 
 int bit_count(bitboard_t b);
+
+void search_pawns(const chessboard_t);
+void search_rooks(const chessboard_t);
+void search_knights(const chessboard_t);
+void search_bishops(const chessboard_t);
+void search_queens(const chessboard_t);
+void search_king(const chessboard_t);
+void search_moves(const chessboard_t);
 
 // -----------------------------------------------------------------------------
 // evaluate.cpp
