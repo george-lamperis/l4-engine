@@ -166,9 +166,9 @@ void print_chessboard(chessboard_t board)
         cout << "\t" << rank << " ";
 
         for (int j = 0; j < 8; j++ ) {
-            bitboard_t bit = board.w_bishops & square_mask(i+j);
+            bitboard_t mask = square_mask(i+j);
 
-            if (bit)
+            if (board.w_pawns & mask)
                 cout << "| X ";
             else
                 cout << "|   ";
