@@ -75,8 +75,6 @@ bitboard_t rank_mask(size_t rank);
 bitboard_t file_mask(size_t file);
 bitboard_t square_mask(size_t sq);
 
-void print_bitboard(bitboard_t b);
-void print_chessboard(chessboard_t board);
 
 
 struct chessboard_t {
@@ -112,6 +110,9 @@ struct chessboard_t {
     bool whites_turn;
 };
 
+
+void print_bitboard(bitboard_t b);
+void print_chessboard(chessboard_t board);
 
 const struct chessboard_t chess_initial_state = {
     rank_mask(RANK_2),      // w_pawns
