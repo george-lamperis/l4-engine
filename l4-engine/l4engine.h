@@ -13,7 +13,7 @@ void create_engine_thread();
 unsigned __stdcall engine_loop(void* pArguments);
 
 // -----------------------------------------------------------------------------
-// chessboard.cpp
+// bitboard.cpp
 // Bitboards and lookup tables and the chessboard data
 // -----------------------------------------------------------------------------
 //

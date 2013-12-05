@@ -71,7 +71,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="chessboard.cpp" />
+    <ClCompile Include="bitboard.cpp" />
     <ClCompile Include="evaluate.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="search.cpp" />
