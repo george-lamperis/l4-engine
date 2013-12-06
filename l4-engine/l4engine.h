@@ -3,15 +3,6 @@
 
 #include <stdint.h>
 
-// These variables should only be read.
-// only modified in uci.cpp
-extern int uci_status;
-extern char best_move[5];
-extern int best_score;
-
-void create_engine_thread();
-unsigned __stdcall engine_loop(void* pArguments);
-
 // -----------------------------------------------------------------------------
 // bitboard.cpp
 // Bitboards and lookup tables and the chessboard data
@@ -136,9 +127,19 @@ void search_moves(const chessboard_t);
 
 
 // -----------------------------------------------------------------------------
+// fen.cpp
+// -----------------------------------------------------------------------------
+void parse_fen(const char *fen);
+
+// -----------------------------------------------------------------------------
 // uci.cpp
 // contains functions for interfacing with UCI
 // -----------------------------------------------------------------------------
 
+void uci_identify();
+void uci_option();
+void uci_readyok();
+
+// uci_info(int depth, score, ...);
 
 #endif // L4_ENGINE_H
