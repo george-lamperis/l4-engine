@@ -60,6 +60,8 @@ enum eSquare {
     A8, B8, C8, D8, E8, F8, G8, H8
 };
 
+
+// TODO change order to follow FEN?
 struct chessboard_t {
     bitboard_t w_pawns;
     bitboard_t w_rooks;
@@ -81,13 +83,10 @@ struct chessboard_t {
     bitboard_t b_enpassant;
 
     // can castle?
-    bool w_king_moved;
-    bool w_rook1_moved;
-    bool w_rook2_moved;
-
-    bool b_king_moved;
-    bool b_rook1_moved;
-    bool b_rook2_moved;
+    bool w_kingside;
+    bool w_queenside;
+    bool b_kingside;
+    bool b_queenside;
 
     // whose turn?
     bool whites_turn;
@@ -99,6 +98,9 @@ extern const struct chessboard_t chess_initial_state;
 bitboard_t rank_mask(size_t rank);
 bitboard_t file_mask(size_t file);
 bitboard_t square_mask(size_t sq);
+
+bitboard_t all_white(chessboard_t b);
+bitboard_t all_black(chessboard_t b);
 
 chessboard_t move(eSquare src, eSquare dst, chessboard_t board);
 
@@ -125,16 +127,20 @@ void search_moves(const chessboard_t);
 // contains logic to assign a score to a chess state.
 // -----------------------------------------------------------------------------
 
-
-// -----------------------------------------------------------------------------
-// fen.cpp
-// -----------------------------------------------------------------------------
-void parse_fen(const char *fen);
-
 // -----------------------------------------------------------------------------
 // uci.cpp
 // contains functions for interfacing with UCI
 // -----------------------------------------------------------------------------
+
+enum eEngineState {
+    IDLE, 
+    THINKING,
+    PONDERING, 
+};
+
+
+chessboard_t parse_fen(const char *fen);
+chessboard_t parse_pos(const char *pos);
 
 void uci_identify();
 void uci_option();

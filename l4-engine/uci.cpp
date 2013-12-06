@@ -5,7 +5,12 @@
 
 using namespace std;
 
-enum {STATUS_PONDERING, STATUS_IDLE, STATUS_QUIT};
+
+void engine_loop()
+{
+
+}
+
 
 void uci_identify()
 {
