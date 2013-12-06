@@ -175,7 +175,29 @@ void print_chessboard(chessboard_t board)
             bitboard_t mask = square_mask(i+j);
 
             if (board.w_pawns & mask)
-                cout << "| X ";
+                cout << "| P ";
+            else if (board.w_rooks & mask)
+                cout << "| R ";
+            else if (board.w_knights & mask)
+                cout << "| N ";
+            else if (board.w_bishops & mask)
+                cout << "| B ";
+            else if (board.w_queens & mask)
+                cout << "| Q ";
+            else if (board.w_king & mask)
+                cout << "| K ";
+            else if (board.b_pawns & mask)
+                cout << "| p ";
+            else if (board.b_rooks & mask)
+                cout << "| r ";
+            else if (board.b_knights & mask)
+                cout << "| n ";
+            else if (board.b_bishops & mask)
+                cout << "| b ";
+            else if (board.b_queens & mask)
+                cout << "| q ";
+            else if (board.b_king & mask)
+                cout << "| k ";
             else
                 cout << "|   ";
         }
