@@ -14,3 +14,10 @@ int bit_count (bitboard_t x)
 
     return count;
 }
+
+
+chessboard_t move(eSquare start, eSquare end, chessboard_t board)
+{
+
+    return board;
+}

@@ -10,11 +10,6 @@ using namespace std;
 
 void uci_input();
 
-enum eEngineState {
-    IDLE,
-    THINKING,
-};
-
 int main ()
 {
     chessboard_t board = chess_initial_state;

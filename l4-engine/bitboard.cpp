@@ -106,12 +106,23 @@ const bitboard_t Square[64] = {
     File[FILE_H] & Rank[RANK_8]
 };
 
+
 const struct chessboard_t chess_initial_state = {
-    rank_mask(RANK_2),      // w_pawns
+    rank_mask(RANK_2),                  // w_pawns
+    square_mask(A1) | square_mask(H1),  // w_rooks
+    square_mask(B1) | square_mask(G1),  // w_knights
+    square_mask(C1) | square_mask(F1),  // w_bishops
+    square_mask(D1),                    // w_queens
+    square_mask(E1),                    // w_king
 
-
-    rank_mask(RANK_7),      // b_pawns
+    rank_mask(RANK_7),                  // b_pawns
+    square_mask(A8) | square_mask(H8),  // b_rooks
+    square_mask(B8) | square_mask(G8),  // b_knights
+    square_mask(C8) | square_mask(F8),  // b_bishops
+    square_mask(D8),                    // b_queens
+    square_mask(E8),                    // b_king
 };
+
 
 bitboard_t rank_mask(size_t rank)
 {
@@ -160,8 +171,7 @@ void print_bitboard(bitboard_t b)
 }
 
 
-// QKRBNP for white pieces, lowercase for black
-// http://en.wikipedia.org/wiki/Forsyth%E2%80%93Edwards_Notation
+
 void print_chessboard(chessboard_t board)
 {
     cout << "\t    a   b   c   d   e   f   g   h  " << endl;

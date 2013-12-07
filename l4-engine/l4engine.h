@@ -79,8 +79,7 @@ struct chessboard_t {
 
     // at most one bit set. That bit  is the location
     // of the pawn which moved two spaces forward.
-    bitboard_t w_enpassant;
-    bitboard_t b_enpassant;
+    bitboard_t en_passant;
 
     // can castle?
     bool w_kingside;
@@ -95,6 +94,7 @@ struct chessboard_t {
 extern const struct chessboard_t chess_initial_state;
 
 // These functions defined in bitboard.cpp
+// this source file deals with the encoding.
 bitboard_t rank_mask(size_t rank);
 bitboard_t file_mask(size_t file);
 bitboard_t square_mask(size_t sq);
@@ -102,10 +102,10 @@ bitboard_t square_mask(size_t sq);
 bitboard_t all_white(chessboard_t b);
 bitboard_t all_black(chessboard_t b);
 
-chessboard_t move(eSquare src, eSquare dst, chessboard_t board);
-
 void print_bitboard(bitboard_t b);
 void print_chessboard(chessboard_t board);
+
+// TODO something to assert that each set is disjoint
 
 // -----------------------------------------------------------------------------
 // search.cpp
@@ -113,6 +113,8 @@ void print_chessboard(chessboard_t board);
 // -----------------------------------------------------------------------------
 
 int bit_count(bitboard_t b);
+
+chessboard_t move(eSquare start, eSquare end, chessboard_t board);
 
 void search_pawns(const chessboard_t);
 void search_rooks(const chessboard_t);
@@ -138,7 +140,8 @@ enum eEngineState {
     PONDERING, 
 };
 
-
+// QKRBNP for white pieces, lowercase for black
+// http://en.wikipedia.org/wiki/Forsyth%E2%80%93Edwards_Notation
 chessboard_t parse_fen(const char *fen);
 chessboard_t parse_pos(const char *pos);
 
