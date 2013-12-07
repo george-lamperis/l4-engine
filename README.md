@@ -12,6 +12,7 @@ LERF encoding inspired/copied from
 http://pages.cs.wisc.edu/~psilord/blog/data/chess-pages/rep.html
 http://chessprogramming.wikispaces.com/Square+Mapping+Considerations
 
+```
         a    b    c    d    e    f    g    h
       +----+----+----+----+----+----+----+----+
     8 | 56 | 57 | 58 | 59 | 60 | 61 | 62 | 63 | 8
@@ -31,8 +32,10 @@ http://chessprogramming.wikispaces.com/Square+Mapping+Considerations
     1 | 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 1
       +----+----+----+----+----+----+----+----+
         a    b    c    d    e    f    g    h
+```
 
 Neighbors compass rose
+```
     +----+----+----+
     | +7 | +8 | +9 |
     +----+----+----+
@@ -40,3 +43,4 @@ Neighbors compass rose
     +----+----+----+
     | -9 | -8 | -7 |
     +----+----+----+
+```
