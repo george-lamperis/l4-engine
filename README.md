@@ -12,6 +12,7 @@ LERF encoding inspired/copied from
 http://pages.cs.wisc.edu/~psilord/blog/data/chess-pages/rep.html
 http://chessprogramming.wikispaces.com/Square+Mapping+Considerations
 
+Each number corresponds to a bit, with 0 being the LSB and 63 being the MSB.
 ```
         a    b    c    d    e    f    g    h
       +----+----+----+----+----+----+----+----+
@@ -34,7 +35,19 @@ http://chessprogramming.wikispaces.com/Square+Mapping+Considerations
         a    b    c    d    e    f    g    h
 ```
 
-Neighbors compass rose
+Some example bitboards:
+```
+a-file             0x0101010101010101
+h-file             0x8080808080808080
+1st rank           0x00000000000000FF
+8th rank           0xFF00000000000000
+a1-h8 diagonal     0x8040201008040201
+h1-a8 antidiagonal 0x0102040810204080
+light squares      0x55AA55AA55AA55AA
+dark squares       0xAA55AA55AA55AA55
+```
+
+Neighbors compass rose:
 ```
     +----+----+----+
     | +7 | +8 | +9 |
