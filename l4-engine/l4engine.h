@@ -5,7 +5,7 @@
 
 // -----------------------------------------------------------------------------
 // bitboard.cpp
-// Bitboards and lookup tables and the chessboard data
+// stuff involving the bitboard encoding, such as lookup tables.
 // -----------------------------------------------------------------------------
 //
 // LERF encoding
@@ -44,7 +44,7 @@
 // -----------------------------------------------------------------------------
 
 // TODO unsigned?
-typedef int64_t bitboard_t;
+typedef uint64_t bitboard_t;
 
 enum eRank { RANK_1, RANK_2, RANK_3, RANK_4, RANK_5, RANK_6, RANK_7, RANK_8 };
 enum eFile { FILE_A, FILE_B, FILE_C, FILE_D, FILE_E, FILE_F, FILE_G, FILE_H };
@@ -61,7 +61,6 @@ enum eSquare {
 };
 
 
-// TODO change order to follow FEN?
 struct chessboard_t {
     bitboard_t w_pawns;
     bitboard_t w_rooks;
@@ -81,8 +80,8 @@ struct chessboard_t {
     // of the pawn which moved two spaces forward.
     bitboard_t en_passant;
 
-    bitboard_t halfmove;
-    bitboard_t fullmove;
+    int halfmove;
+    int fullmove;
 
     // castling
     bool w_kingside;
@@ -90,7 +89,6 @@ struct chessboard_t {
     bool b_kingside;
     bool b_queenside;
 
-    // whose turn?
     bool whites_turn;
 };
 
