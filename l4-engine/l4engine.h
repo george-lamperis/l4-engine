@@ -115,4 +115,9 @@ void uci_readyok();
 
 // uci_info(int depth, score, ...);
 
+// NEXT
+// fenstrings
+// assert disjoint
+// test bitcount?
+
 #endif // L4_ENGINE_H
