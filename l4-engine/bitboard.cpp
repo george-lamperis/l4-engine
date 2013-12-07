@@ -121,6 +121,18 @@ const struct chessboard_t chess_initial_state = {
     square_mask(C8) | square_mask(F8),  // b_bishops
     square_mask(D8),                    // b_queens
     square_mask(E8),                    // b_king
+
+    0,                                  // en_passant
+
+    0,                                  // halfmove
+    1,                                  // fullmove
+
+    true,                               // w_kingside
+    true,                               // w_queenside
+    true,                               // b_kingside
+    true,                               // b_queenside
+
+    true,                               // whites_turn
 };
 
 

@@ -77,11 +77,14 @@ struct chessboard_t {
     bitboard_t b_queens;
     bitboard_t b_king;
 
-    // at most one bit set. That bit  is the location
+    // at most one bit set. That bit is the location
     // of the pawn which moved two spaces forward.
     bitboard_t en_passant;
 
-    // can castle?
+    bitboard_t halfmove;
+    bitboard_t fullmove;
+
+    // castling
     bool w_kingside;
     bool w_queenside;
     bool b_kingside;
