@@ -1,7 +1,6 @@
 #include "l4engine.h"
 
 #include <iostream>
-#include <iomanip>
 #include <assert.h>
 
 using namespace std;
@@ -181,7 +180,6 @@ void print_bitboard(bitboard_t b)
 
     cout << "\t    a   b   c   d   e   f   g   h  " << endl;
 }
-
 
 
 void print_chessboard(chessboard_t board)
