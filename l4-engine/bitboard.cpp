@@ -5,14 +5,6 @@
 
 using namespace std;
 
-//a-file             0x0101010101010101
-//h-file             0x8080808080808080
-//1st rank           0x00000000000000FF
-//8th rank           0xFF00000000000000
-//a1-h8 diagonal     0x8040201008040201
-//h1-a8 antidiagonal 0x0102040810204080
-//light squares      0x55AA55AA55AA55AA
-//dark squares       0xAA55AA55AA55AA55
 
 const bitboard_t Rank[8] = {
     0x00000000000000FF,     // rank 1
@@ -228,4 +220,3 @@ void print_chessboard(chessboard_t board)
 
     cout << "\t    a   b   c   d   e   f   g   h  " << endl;
 }
-
