@@ -1,14 +1,16 @@
 #ifndef L4_ENGINE_H
 #define L4_ENGINE_H
 
+#include <stdbool.h>
 #include <stdint.h>
+#include <inttypes.h>
 
 // -----------------------------------------------------------------------------
 // bitboard.c
 // stuff involving the bitboard encoding, such as lookup tables.
 // -----------------------------------------------------------------------------
 
-typedef enum {FALSE, TRUE} bool;
+// typedef enum {FALSE, TRUE} bool;
 typedef uint64_t bitboard_t;
 
 enum eRank { RANK_1, RANK_2, RANK_3, RANK_4, RANK_5, RANK_6, RANK_7, RANK_8 };
@@ -80,6 +82,7 @@ void print_bitboard(bitboard_t b);
 bitboard_t string_to_bitboard();
 void bitboard_to_string();
 
+bool is_equal(struct chessboard_t a, struct chessboard_t b);
 // TODO something to assert that each set is disjoint
 
 // -----------------------------------------------------------------------------

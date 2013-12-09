@@ -3,6 +3,9 @@
 
 #include "l4engine.h"
 
+
+// TODO 
+// designated initializers?
 /*
 const struct chessboard_t chess_initial_state = {
     rank_mask(RANK_2),                  // w_pawns
@@ -64,8 +67,7 @@ void print_bitboard(bitboard_t b)
         printf("\t%d ", rank);
 
         for (int j = 0; j < 8; j++ ) {
-            bitboard_t bit = b & square_mask(i+j);
-            assert(bit_count(bit) == 1);
+            bitboard_t bit = (b & square_mask(i+j));
 
             if (b & bit)
                 printf("| X ");
@@ -81,48 +83,50 @@ void print_bitboard(bitboard_t b)
 }
 
 
-void print_chessboard(chessboard_t board)
+// TODO
+// print move numbers, players turn, etc.
+void print_chessboard(struct chessboard_t board)
 {
     printf("\t    a   b   c   d   e   f   g   h  \n");
     printf("\t  +---+---+---+---+---+---+---+---+\n");
 
     for (int i = 56; i >= 0; i -= 8) {
         int rank = (i / 8) + 1;
-        cout << "\t" << rank << " ";
+        printf("\t%d ", rank);
 
         for (int j = 0; j < 8; j++ ) {
             bitboard_t mask = square_mask(i+j);
 
             if (board.w_pawns & mask)
-                cout << "| P ";
+                printf("| P ");
             else if (board.w_rooks & mask)
-                cout << "| R ";
+                printf("| R ");
             else if (board.w_knights & mask)
-                cout << "| N ";
+                printf("| N ");
             else if (board.w_bishops & mask)
-                cout << "| B ";
+                printf("| B ");
             else if (board.w_queens & mask)
-                cout << "| Q ";
+                printf("| Q ");
             else if (board.w_king & mask)
-                cout << "| K ";
+                printf("| K ");
             else if (board.b_pawns & mask)
-                cout << "| p ";
+                printf("| p ");
             else if (board.b_rooks & mask)
-                cout << "| r ";
+                printf("| r ");
             else if (board.b_knights & mask)
-                cout << "| n ";
+                printf("| n ");
             else if (board.b_bishops & mask)
-                cout << "| b ";
+                printf("| b ");
             else if (board.b_queens & mask)
-                cout << "| q ";
+                printf("| q ");
             else if (board.b_king & mask)
-                cout << "| k ";
+                printf("| k ");
             else
-                cout << "|   ";
+                printf("|   ");
         }
 
-        cout << "| " << rank << endl;
-        cout << "\t  +---+---+---+---+---+---+---+---+" << endl;
+        printf( "| %d\n", rank);
+        printf("\t  +---+---+---+---+---+---+---+---+\n");
     }
 
     printf("\t    a   b   c   d   e   f   g   h  \n");
