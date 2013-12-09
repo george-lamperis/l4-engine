@@ -36,21 +36,21 @@ const struct chessboard_t chess_initial_state = {
 bitboard_t rank_mask(enum eRank rank)
 {
     assert(rank <= 8);
-    return 0x00000000000000FFULL << rank;
+    return UINT64_C(0x00000000000000FF) << rank;
 }
 
 
 bitboard_t file_mask(enum eFile file)
 {
     assert(file <= 8);
-    return 0x0101010101010101ULL << file;
+    return UINT64_C(0x0101010101010101) << file;
 }
 
 
 bitboard_t square_mask(enum eSquare sq)
 {
     assert(sq <= 63);
-    return 1ULL << sq;
+    return UINT64_C(1) << sq;
 }
 
 
@@ -65,9 +65,8 @@ void print_bitboard(bitboard_t b)
 
         for (int j = 0; j < 8; j++ ) {
             bitboard_t bit = b & square_mask(i+j);
+            assert(bit_count(bit) == 1);
 
-            // bitboard_t mask = square_mask(i+j);
-            // assert(bit_count(mask) == 1);
             if (b & bit)
                 printf("| X ");
             else
@@ -81,11 +80,11 @@ void print_bitboard(bitboard_t b)
     printf("\t    a   b   c   d   e   f   g   h  \n");
 }
 
-/*
+
 void print_chessboard(chessboard_t board)
 {
-    cout << "\t    a   b   c   d   e   f   g   h  " << endl;
-    cout << "\t  +---+---+---+---+---+---+---+---+" << endl;
+    printf("\t    a   b   c   d   e   f   g   h  \n");
+    printf("\t  +---+---+---+---+---+---+---+---+\n");
 
     for (int i = 56; i >= 0; i -= 8) {
         int rank = (i / 8) + 1;
@@ -126,6 +125,5 @@ void print_chessboard(chessboard_t board)
         cout << "\t  +---+---+---+---+---+---+---+---+" << endl;
     }
 
-    cout << "\t    a   b   c   d   e   f   g   h  " << endl;
+    printf("\t    a   b   c   d   e   f   g   h  \n");
 }
-*/
