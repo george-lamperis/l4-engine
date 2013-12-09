@@ -71,11 +71,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="bitboard.cpp" />
-    <ClCompile Include="evaluate.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="search.cpp" />
-    <ClCompile Include="uci.cpp" />
+    <ClCompile Include="bitboard.c" />
+    <ClCompile Include="evaluate.c" />
+    <ClCompile Include="main.c" />
+    <ClCompile Include="search.c" />
+    <ClCompile Include="uci.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="l4engine.h" />
