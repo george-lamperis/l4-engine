@@ -2,16 +2,13 @@
 #define L4_ENGINE_H
 
 #include <stdint.h>
-#include <string>
 
 // -----------------------------------------------------------------------------
 // bitboard.cpp
 // stuff involving the bitboard encoding, such as lookup tables.
 // -----------------------------------------------------------------------------
 
-// bool for C
-//typedef enum {FALSE, TRUE} bool;
-
+typedef enum {FALSE, TRUE} bool;
 typedef uint64_t bitboard_t;
 
 enum eRank { RANK_1, RANK_2, RANK_3, RANK_4, RANK_5, RANK_6, RANK_7, RANK_8 };
@@ -62,18 +59,19 @@ struct chessboard_t {
 
 extern const struct chessboard_t chess_initial_state;
 
-bitboard_t rank_mask(size_t rank);
-bitboard_t file_mask(size_t file);
-bitboard_t square_mask(size_t sq);
+// TODO some replacement like size_t for here?
+bitboard_t rank_mask(int rank);
+bitboard_t file_mask(int file);
+bitboard_t square_mask(int sq);
 
-bitboard_t all_white(chessboard_t b);
-bitboard_t all_black(chessboard_t b);
+bitboard_t all_white(struct chessboard_t b);
+bitboard_t all_black(struct chessboard_t b);
 
 void print_bitboard(bitboard_t b);
-void print_chessboard(chessboard_t board);
+void print_chessboard(struct chessboard_t board);
 
 bitboard_t string_to_bitboard();
-std::string bitboard_to_string();
+void bitboard_to_string();
 
 // TODO something to assert that each set is disjoint
 
@@ -84,15 +82,15 @@ std::string bitboard_to_string();
 
 int bit_count(bitboard_t b);
 
-chessboard_t move(eSquare start, eSquare end, chessboard_t board);
+struct chessboard_t move(enum eSquare start, enum eSquare end, struct chessboard_t board);
 
-void search_pawns(const chessboard_t);
-void search_rooks(const chessboard_t);
-void search_knights(const chessboard_t);
-void search_bishops(const chessboard_t);
-void search_queens(const chessboard_t);
-void search_king(const chessboard_t);
-void search_moves(const chessboard_t);
+void search_pawns(const struct chessboard_t);
+void search_rooks(const struct chessboard_t);
+void search_knights(const struct chessboard_t);
+void search_bishops(const struct chessboard_t);
+void search_queens(const struct chessboard_t);
+void search_king(const struct chessboard_t);
+void search_moves(const struct chessboard_t);
 
 // -----------------------------------------------------------------------------
 // evaluate.cpp
@@ -113,8 +111,8 @@ enum eEngineState {
 
 // QKRBNP for white pieces, lowercase for black
 // http://en.wikipedia.org/wiki/Forsyth%E2%80%93Edwards_Notation
-chessboard_t parse_fen(std::string fen);
-chessboard_t parse_pos(std::string pos);
+struct chessboard_t parse_fen(const char *fen);
+struct chessboard_t parse_pos(const char *pos);
 
 void uci_identify();
 void uci_option();
@@ -128,3 +126,4 @@ void uci_readyok();
 // test bitcount?
 
 #endif // L4_ENGINE_H
+
