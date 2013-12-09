@@ -1,9 +1,4 @@
-#include <iostream>
-
 #include "l4engine.h"
-
-using namespace std;
-
 
 void engine_loop()
 {

@@ -4,7 +4,7 @@
 #include <stdint.h>
 
 // -----------------------------------------------------------------------------
-// bitboard.cpp
+// bitboard.c
 // stuff involving the bitboard encoding, such as lookup tables.
 // -----------------------------------------------------------------------------
 
@@ -57,18 +57,25 @@ struct chessboard_t {
     bool whites_turn;
 };
 
+struct move {
+    enum eSquare from;
+    enum eSquare to;
+    bool capture;
+    bool promotion;
+};
+
 extern const struct chessboard_t chess_initial_state;
 
 // TODO some replacement like size_t for here?
-bitboard_t rank_mask(int rank);
-bitboard_t file_mask(int file);
-bitboard_t square_mask(int sq);
+bitboard_t rank_mask(enum eRank rank);
+bitboard_t file_mask(enum eFile file);
+bitboard_t square_mask(enum eSquare sq);
 
 bitboard_t all_white(struct chessboard_t b);
 bitboard_t all_black(struct chessboard_t b);
 
 void print_bitboard(bitboard_t b);
-void print_chessboard(struct chessboard_t board);
+//void print_chessboard(struct chessboard_t board);
 
 bitboard_t string_to_bitboard();
 void bitboard_to_string();
@@ -76,7 +83,7 @@ void bitboard_to_string();
 // TODO something to assert that each set is disjoint
 
 // -----------------------------------------------------------------------------
-// search.cpp
+// search.c
 // contains code which generates all legal moves
 // -----------------------------------------------------------------------------
 
@@ -93,12 +100,12 @@ void search_king(const struct chessboard_t);
 void search_moves(const struct chessboard_t);
 
 // -----------------------------------------------------------------------------
-// evaluate.cpp
+// evaluate.c
 // contains logic to assign a score to a chess state.
 // -----------------------------------------------------------------------------
 
 // -----------------------------------------------------------------------------
-// uci.cpp
+// uci.c
 // contains functions for interfacing with UCI 
 // and controlling program execution.
 // -----------------------------------------------------------------------------
@@ -114,6 +121,7 @@ enum eEngineState {
 struct chessboard_t parse_fen(const char *fen);
 struct chessboard_t parse_pos(const char *pos);
 
+
 void uci_identify();
 void uci_option();
 void uci_readyok();
@@ -126,4 +134,3 @@ void uci_readyok();
 // test bitcount?
 
 #endif // L4_ENGINE_H
-
