@@ -2,11 +2,15 @@
 #define L4_ENGINE_H
 
 #include <stdint.h>
+#include <string>
 
 // -----------------------------------------------------------------------------
 // bitboard.cpp
 // stuff involving the bitboard encoding, such as lookup tables.
 // -----------------------------------------------------------------------------
+
+// bool for C
+//typedef enum {FALSE, TRUE} bool;
 
 typedef uint64_t bitboard_t;
 
@@ -68,6 +72,9 @@ bitboard_t all_black(chessboard_t b);
 void print_bitboard(bitboard_t b);
 void print_chessboard(chessboard_t board);
 
+bitboard_t string_to_bitboard();
+std::string bitboard_to_string();
+
 // TODO something to assert that each set is disjoint
 
 // -----------------------------------------------------------------------------
@@ -106,8 +113,8 @@ enum eEngineState {
 
 // QKRBNP for white pieces, lowercase for black
 // http://en.wikipedia.org/wiki/Forsyth%E2%80%93Edwards_Notation
-chessboard_t parse_fen(const char *fen);
-chessboard_t parse_pos(const char *pos);
+chessboard_t parse_fen(std::string fen);
+chessboard_t parse_pos(std::string pos);
 
 void uci_identify();
 void uci_option();

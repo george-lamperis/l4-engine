@@ -13,6 +13,7 @@
   <ItemGroup>
     <ClCompile Include="test_main.cpp" />
     <ClCompile Include="test_search.cpp" />
+    <ClCompile Include="test_uci.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{38CA9FEB-C850-4623-AE31-923C751F32F8}</ProjectGuid>

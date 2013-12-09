@@ -1,5 +1,4 @@
 #include <iostream>
-#include <string> 
 
 #include "l4engine.h"
 
@@ -57,4 +56,33 @@ void uci_input()
 		}
 	}
 
+}
+
+
+chessboard_t parse_fen(string fen)
+{
+    chessboard_t b;
+
+    string pieces;
+    string color;
+    string castling;
+    string enpassant;
+    string halfmove;
+    string fullmove;
+
+    // TODO assert the string makes sense
+
+    // Figure out bitboards
+    for (int i = 56; i >= 0; i -= 8) {
+        int rank = (i / 8) + 1;
+
+        for (int j = 0; j < 8; j++ ) {
+            bitboard_t bit = square_mask(i+j);
+
+        }
+
+    }
+
+
+    return chess_initial_state;
 }
