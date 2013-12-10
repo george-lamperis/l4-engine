@@ -1,4 +1,6 @@
+#include <stdio.h>
 #include "l4engine.h"
+
 
 void engine_loop()
 {
@@ -8,15 +10,17 @@ void engine_loop()
 
 void uci_identify()
 {
-    cout << "id name l4-engine" << endl;
-    cout << "id author George Lamperis" << endl;
-    cout << "uciok" << endl;
+    printf("id name l4-engine\n");
+    printf("id author George Lamperis\n");
+    printf("uciok\n");
+    fflush(stdout);
 }
 
 
 void uci_readyok()
 {
-    cout << "readyok" << endl;
+    printf("readyok\n");
+    fflush(stdout);
 }
 
 
