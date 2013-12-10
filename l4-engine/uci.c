@@ -58,16 +58,16 @@ void uci_input()
 }
 
 
-chessboard_t parse_fen(string fen)
+struct chessboard_t parse_fen(const char *fen)
 {
-    chessboard_t b;
+    struct chessboard_t b;
 
-    string pieces;
-    string color;
-    string castling;
-    string enpassant;
-    string halfmove;
-    string fullmove;
+    char *pieces;
+    char *color;
+    char *castling;
+    char *enpassant;
+    char *halfmove;
+    char *fullmove;
 
     // TODO assert the string makes sense
 
@@ -79,9 +79,7 @@ chessboard_t parse_fen(string fen)
             bitboard_t bit = square_mask(i+j);
 
         }
-
     }
-
 
     return chess_initial_state;
 }

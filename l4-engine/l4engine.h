@@ -10,7 +10,6 @@
 // stuff involving the bitboard encoding, such as lookup tables.
 // -----------------------------------------------------------------------------
 
-// typedef enum {FALSE, TRUE} bool;
 typedef uint64_t bitboard_t;
 
 enum eRank { RANK_1, RANK_2, RANK_3, RANK_4, RANK_5, RANK_6, RANK_7, RANK_8 };
