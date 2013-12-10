@@ -7,6 +7,7 @@
 //      compiler/version
 //      date/time?
 // - figure out uint64/inttypes.h for windows
+// - printf buffering
 
 
 int main ()
