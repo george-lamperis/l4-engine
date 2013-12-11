@@ -5,6 +5,10 @@
 #include <stdint.h>
 #include <inttypes.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 // -----------------------------------------------------------------------------
 // bitboard.c
 // stuff involving the bitboard encoding, such as lookup tables.
@@ -134,5 +138,10 @@ void uci_readyok();
 // fenstrings
 // assert disjoint
 // test bitcount?
+
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif // L4_ENGINE_H
