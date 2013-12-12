@@ -32,7 +32,9 @@ void uci_input()
 
 struct chessboard_t parse_fen(const char *fen)
 {
-    struct chessboard_t b;
+    struct chessboard_t b = {
+        .w_pawns = 1,
+    };
 
     char *pieces;
     char *color;
@@ -53,6 +55,5 @@ struct chessboard_t parse_fen(const char *fen)
         }
     }
 
-    struct chessboard_t x = {0};
-    return x;
+    return b;
 }

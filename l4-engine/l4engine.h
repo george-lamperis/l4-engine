@@ -13,7 +13,6 @@ extern "C" {
 // bitboard.c
 // stuff involving the bitboard encoding
 // -----------------------------------------------------------------------------
-
 typedef uint64_t bitboard_t;
 
 enum eRank { RANK_1, RANK_2, RANK_3, RANK_4, RANK_5, RANK_6, RANK_7, RANK_8 };
@@ -71,7 +70,6 @@ struct move {
 
 extern const struct chessboard_t chess_initial_state;
 
-// TODO some replacement like size_t for here?
 bitboard_t rank_mask(enum eRank rank);
 bitboard_t file_mask(enum eFile file);
 bitboard_t square_mask(enum eSquare sq);
@@ -79,14 +77,14 @@ bitboard_t square_mask(enum eSquare sq);
 bitboard_t all_white(struct chessboard_t b);
 bitboard_t all_black(struct chessboard_t b);
 
+bool compare_chessboards(struct chessboard_t a, struct chessboard_t b);
 int bit_count(bitboard_t b);
 void print_bitboard(bitboard_t b);
-//void print_chessboard(struct chessboard_t board);
+void print_chessboard(struct chessboard_t board);
 
 bitboard_t string_to_bitboard();
 void bitboard_to_string();
 
-bool is_equal(struct chessboard_t a, struct chessboard_t b);
 // TODO something to assert that each set is disjoint
 
 // -----------------------------------------------------------------------------
@@ -108,6 +106,10 @@ void search_moves(const struct chessboard_t);
 // contains functions for interfacing with UCI 
 // and controlling program execution.
 // -----------------------------------------------------------------------------
+
+const char WHITE_PAWN = 'W';
+// ... 
+const char BLACK_PAWN = 'w';
 
 enum eEngineState {
     IDLE, 
