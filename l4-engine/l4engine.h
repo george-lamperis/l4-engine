@@ -30,7 +30,7 @@ enum eSquare {
 };
 
 
-struct chessboard_t {
+struct position {
     bitboard w_pawns;
     bitboard w_rooks;
     bitboard w_knights;
@@ -47,7 +47,7 @@ struct chessboard_t {
 
     // at most one bit set. That bit is the location
     // of the pawn which moved two spaces forward.
-    bitboard en_passant;
+    bitboard en_passant; // TODO it could also be an enum
 
     int halfmove;
     int fullmove;
@@ -68,22 +68,19 @@ struct move {
     bool promotion;
 };
 
-extern const struct chessboard_t chess_initial_state;
+extern const struct position start_pos;
 
 bitboard rank_mask(enum eRank rank);
 bitboard file_mask(enum eFile file);
 bitboard square_mask(enum eSquare sq);
 
-bitboard all_white(struct chessboard_t b);
-bitboard all_black(struct chessboard_t b);
+bitboard all_white(struct position p);
+bitboard all_black(struct position p);
+bool positions_equal(struct position a, struct position b);
 
-bool compare_chessboards(struct chessboard_t a, struct chessboard_t b);
 int bit_count(bitboard b);
 void print_bitboard(bitboard b);
-void print_chessboard(struct chessboard_t board);
-
-bitboard string_to_bitboard();
-void bitboard_to_string();
+void print_position(struct position p);
 
 // TODO something to assert that each set is disjoint
 
@@ -92,13 +89,13 @@ void bitboard_to_string();
 // contains code which generates all legal moves
 // -----------------------------------------------------------------------------
 
-struct chessboard_t move(enum eSquare start, enum eSquare end, struct chessboard_t board);
+struct position make_move(struct move, struct position board);
 
-void search_moves(const struct chessboard_t);
+void search_moves(const struct position);
 
 // -----------------------------------------------------------------------------
 // evaluate.c
-// contains logic to assign a score to a chess state.
+// contains logic to assign a score to a chess position.
 // -----------------------------------------------------------------------------
 
 // -----------------------------------------------------------------------------
@@ -119,9 +116,8 @@ enum eEngineState {
 
 // QKRBNP for white pieces, lowercase for black
 // http://en.wikipedia.org/wiki/Forsyth%E2%80%93Edwards_Notation
-struct chessboard_t parse_fen(const char *fen);
-struct chessboard_t parse_pos(const char *pos);
-
+struct position parse_fen(const char *fen);
+struct position parse_pos(const char *pos);
 
 void uci_identify();
 void uci_option();
