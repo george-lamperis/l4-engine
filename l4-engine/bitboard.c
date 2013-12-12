@@ -4,37 +4,34 @@
 #include "l4engine.h"
 
 
-// TODO 
-// designated initializers?
-/*
 const struct chessboard_t chess_initial_state = {
-    rank_mask(RANK_2),                  // w_pawns
-    square_mask(A1) | square_mask(H1),  // w_rooks
-    square_mask(B1) | square_mask(G1),  // w_knights
-    square_mask(C1) | square_mask(F1),  // w_bishops
-    square_mask(D1),                    // w_queens
-    square_mask(E1),                    // w_king
+    .w_pawns = UINT64_C(0x000000000000FF00),
+    .w_rooks = UINT64_C(0x0000000000000081),
+    //square_mask(B1) | square_mask(G1),  // w_knights
+    //square_mask(C1) | square_mask(F1),  // w_bishops
+    //square_mask(D1),                    // w_queens
+    //square_mask(E1),                    // w_king
 
-    rank_mask(RANK_7),                  // b_pawns
-    square_mask(A8) | square_mask(H8),  // b_rooks
-    square_mask(B8) | square_mask(G8),  // b_knights
-    square_mask(C8) | square_mask(F8),  // b_bishops
-    square_mask(D8),                    // b_queens
-    square_mask(E8),                    // b_king
+    .b_pawns = UINT64_C(0x00FF000000000000),
+    .b_rooks = UINT64_C(0x8100000000000000),
+    //square_mask(B8) | square_mask(G8),  // b_knights
+    //square_mask(C8) | square_mask(F8),  // b_bishops
+    //square_mask(D8),                    // b_queens
+    //square_mask(E8),                    // b_king
 
-    0,                                  // en_passant
+    .en_passant = 0,
 
-    0,                                  // halfmove
-    1,                                  // fullmove
+    .halfmove = 0,
+    .fullmove = 1,
 
-    true,                               // w_kingside
-    true,                               // w_queenside
-    true,                               // b_kingside
-    true,                               // b_queenside
+    .w_kingside = true,
+    .w_queenside = true,
+    .b_kingside = true,
+    .b_queenside = true,
 
-    true,                               // whites_turn
+    .whites_turn = true
 };
-*/
+
 
 bitboard_t rank_mask(enum eRank rank)
 {

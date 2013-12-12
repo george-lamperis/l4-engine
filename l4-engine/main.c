@@ -9,16 +9,15 @@
 // - figure out uint64/inttypes.h for windows
 // - printf buffering
 
+// CriticalSection for threading
+// compareandexchange
 
 int main ()
 {
     
     // setvbuf(stream, NULL, _IONBF, 0);
     
-    bitboard_t b = square_mask(H8) | square_mask(G8);
-
-    printf("%" PRIx64 "\n", b);
-    print_bitboard(b);
+    print_chessboard(chess_initial_state);
 
     // uci_input();
 
