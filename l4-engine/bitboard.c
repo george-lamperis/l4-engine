@@ -51,6 +51,13 @@ bitboard_t square_mask(enum eSquare sq)
 }
 
 
+bool compare_chessboards(struct chessboard_t a, struct chessboard_t b)
+{
+    bool b1 = a.w_pawns == b.w_pawns;
+
+    return false;
+}
+
 // Brian Kernighan's way
 // Consecutively reset LS1B in a loop body and counting loop cycles until the
 // bitset becomes empty. Brian Kernighan mentioned the trick in his and
