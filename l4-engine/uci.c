@@ -50,7 +50,7 @@ struct chessboard_t parse_fen(const char *fen)
         int rank = (i / 8) + 1;
 
         for (int j = 0; j < 8; j++ ) {
-            bitboard_t bit = square_mask(i+j);
+            bitboard bit = square_mask(i+j);
 
         }
     }

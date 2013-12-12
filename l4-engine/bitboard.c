@@ -30,21 +30,21 @@ const struct chessboard_t chess_initial_state = {
 };
 
 
-bitboard_t rank_mask(enum eRank rank)
+bitboard rank_mask(enum eRank rank)
 {
     assert(rank <= 8);
     return UINT64_C(0x00000000000000FF) << (8 * rank);
 }
 
 
-bitboard_t file_mask(enum eFile file)
+bitboard file_mask(enum eFile file)
 {
     assert(file <= 8);
     return UINT64_C(0x0101010101010101) << file;
 }
 
 
-bitboard_t square_mask(enum eSquare sq)
+bitboard square_mask(enum eSquare sq)
 {
     assert(sq <= 63);
     return UINT64_C(1) << sq;
@@ -62,7 +62,7 @@ bool compare_chessboards(struct chessboard_t a, struct chessboard_t b)
 // Consecutively reset LS1B in a loop body and counting loop cycles until the
 // bitset becomes empty. Brian Kernighan mentioned the trick in his and
 // Ritchie's book The C Programming_Language, 2nd Edition 1988, exercise 2-9.
-int bit_count (bitboard_t x)
+int bit_count (bitboard x)
 {
     int count = 0;
     while (x) {
@@ -74,7 +74,7 @@ int bit_count (bitboard_t x)
 }
 
 
-void print_bitboard(bitboard_t b) 
+void print_bitboard(bitboard b) 
 {
     printf("\t    a   b   c   d   e   f   g   h  \n");
     printf("\t  +---+---+---+---+---+---+---+---+\n");
@@ -84,7 +84,7 @@ void print_bitboard(bitboard_t b)
         printf("\t%d ", rank);
 
         for (int j = 0; j < 8; j++ ) {
-            bitboard_t bit = (b & square_mask(i+j));
+            bitboard bit = (b & square_mask(i+j));
 
             if (b & bit)
                 printf("| X ");
@@ -112,7 +112,7 @@ void print_chessboard(struct chessboard_t board)
         printf("\t%d ", rank);
 
         for (int j = 0; j < 8; j++ ) {
-            bitboard_t mask = square_mask(i+j);
+            bitboard mask = square_mask(i+j);
 
             if (board.w_pawns & mask)
                 printf("| P ");

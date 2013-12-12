@@ -13,7 +13,7 @@ extern "C" {
 // bitboard.c
 // stuff involving the bitboard encoding
 // -----------------------------------------------------------------------------
-typedef uint64_t bitboard_t;
+typedef uint64_t bitboard;
 
 enum eRank { RANK_1, RANK_2, RANK_3, RANK_4, RANK_5, RANK_6, RANK_7, RANK_8 };
 enum eFile { FILE_A, FILE_B, FILE_C, FILE_D, FILE_E, FILE_F, FILE_G, FILE_H };
@@ -31,23 +31,23 @@ enum eSquare {
 
 
 struct chessboard_t {
-    bitboard_t w_pawns;
-    bitboard_t w_rooks;
-    bitboard_t w_knights;
-    bitboard_t w_bishops;
-    bitboard_t w_queens;
-    bitboard_t w_king;
+    bitboard w_pawns;
+    bitboard w_rooks;
+    bitboard w_knights;
+    bitboard w_bishops;
+    bitboard w_queens;
+    bitboard w_king;
 
-    bitboard_t b_pawns;
-    bitboard_t b_rooks;
-    bitboard_t b_knights;
-    bitboard_t b_bishops;
-    bitboard_t b_queens;
-    bitboard_t b_king;
+    bitboard b_pawns;
+    bitboard b_rooks;
+    bitboard b_knights;
+    bitboard b_bishops;
+    bitboard b_queens;
+    bitboard b_king;
 
     // at most one bit set. That bit is the location
     // of the pawn which moved two spaces forward.
-    bitboard_t en_passant;
+    bitboard en_passant;
 
     int halfmove;
     int fullmove;
@@ -70,19 +70,19 @@ struct move {
 
 extern const struct chessboard_t chess_initial_state;
 
-bitboard_t rank_mask(enum eRank rank);
-bitboard_t file_mask(enum eFile file);
-bitboard_t square_mask(enum eSquare sq);
+bitboard rank_mask(enum eRank rank);
+bitboard file_mask(enum eFile file);
+bitboard square_mask(enum eSquare sq);
 
-bitboard_t all_white(struct chessboard_t b);
-bitboard_t all_black(struct chessboard_t b);
+bitboard all_white(struct chessboard_t b);
+bitboard all_black(struct chessboard_t b);
 
 bool compare_chessboards(struct chessboard_t a, struct chessboard_t b);
-int bit_count(bitboard_t b);
-void print_bitboard(bitboard_t b);
+int bit_count(bitboard b);
+void print_bitboard(bitboard b);
 void print_chessboard(struct chessboard_t board);
 
-bitboard_t string_to_bitboard();
+bitboard string_to_bitboard();
 void bitboard_to_string();
 
 // TODO something to assert that each set is disjoint
@@ -107,9 +107,9 @@ void search_moves(const struct chessboard_t);
 // and controlling program execution.
 // -----------------------------------------------------------------------------
 
-const char WHITE_PAWN = 'W';
+//const char WHITE_PAWN = 'W';
 // ... 
-const char BLACK_PAWN = 'w';
+//const char BLACK_PAWN = 'w';
 
 enum eEngineState {
     IDLE, 
