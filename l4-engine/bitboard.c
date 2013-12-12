@@ -39,7 +39,7 @@ const struct chessboard_t chess_initial_state = {
 bitboard_t rank_mask(enum eRank rank)
 {
     assert(rank <= 8);
-    return UINT64_C(0x00000000000000FF) << rank;
+    return UINT64_C(0x00000000000000FF) << (8 * rank);
 }
 
 
