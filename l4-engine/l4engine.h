@@ -79,6 +79,7 @@ bitboard_t square_mask(enum eSquare sq);
 bitboard_t all_white(struct chessboard_t b);
 bitboard_t all_black(struct chessboard_t b);
 
+int bit_count(bitboard_t b);
 void print_bitboard(bitboard_t b);
 //void print_chessboard(struct chessboard_t board);
 
@@ -93,16 +94,8 @@ bool is_equal(struct chessboard_t a, struct chessboard_t b);
 // contains code which generates all legal moves
 // -----------------------------------------------------------------------------
 
-int bit_count(bitboard_t b);
-
 struct chessboard_t move(enum eSquare start, enum eSquare end, struct chessboard_t board);
 
-void search_pawns(const struct chessboard_t);
-void search_rooks(const struct chessboard_t);
-void search_knights(const struct chessboard_t);
-void search_bishops(const struct chessboard_t);
-void search_queens(const struct chessboard_t);
-void search_king(const struct chessboard_t);
 void search_moves(const struct chessboard_t);
 
 // -----------------------------------------------------------------------------
