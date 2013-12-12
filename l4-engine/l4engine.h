@@ -11,7 +11,7 @@ extern "C" {
 
 // -----------------------------------------------------------------------------
 // bitboard.c
-// stuff involving the bitboard encoding, such as lookup tables.
+// stuff involving the bitboard encoding
 // -----------------------------------------------------------------------------
 
 typedef uint64_t bitboard_t;
