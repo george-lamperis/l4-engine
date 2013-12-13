@@ -4,7 +4,7 @@
 #include "l4engine.h"
 
 
-const struct chessboard_t chess_initial_state = {
+const struct position startpos = {
     .w_pawns   = UINT64_C(0x000000000000FF00),
     .w_rooks   = UINT64_C(0x0000000000000081),
     .w_knights = UINT64_C(0x0000000000000042),
@@ -51,7 +51,7 @@ bitboard square_mask(enum eSquare sq)
 }
 
 
-bool compare_chessboards(struct chessboard_t a, struct chessboard_t b)
+bool positions_equal(struct position a, struct position b)
 {
     bool b1 = a.w_pawns == b.w_pawns;
 
@@ -62,12 +62,12 @@ bool compare_chessboards(struct chessboard_t a, struct chessboard_t b)
 // Consecutively reset LS1B in a loop body and counting loop cycles until the
 // bitset becomes empty. Brian Kernighan mentioned the trick in his and
 // Ritchie's book The C Programming_Language, 2nd Edition 1988, exercise 2-9.
-int bit_count (bitboard x)
+int bit_count (bitboard b)
 {
     int count = 0;
-    while (x) {
+    while (b) {
         count++;
-        x &= x - 1; // reset LS1B
+        b &= b - 1; // reset LS1B
     }
 
     return count;
@@ -102,7 +102,7 @@ void print_bitboard(bitboard b)
 
 // TODO
 // print move numbers, players turn, etc.
-void print_chessboard(struct chessboard_t board)
+void print_position(struct position p)
 {
     printf("\t    a   b   c   d   e   f   g   h  \n");
     printf("\t  +---+---+---+---+---+---+---+---+\n");
@@ -114,29 +114,29 @@ void print_chessboard(struct chessboard_t board)
         for (int j = 0; j < 8; j++ ) {
             bitboard mask = square_mask(i+j);
 
-            if (board.w_pawns & mask)
+            if (p.w_pawns & mask)
                 printf("| P ");
-            else if (board.w_rooks & mask)
+            else if (p.w_rooks & mask)
                 printf("| R ");
-            else if (board.w_knights & mask)
+            else if (p.w_knights & mask)
                 printf("| N ");
-            else if (board.w_bishops & mask)
+            else if (p.w_bishops & mask)
                 printf("| B ");
-            else if (board.w_queens & mask)
+            else if (p.w_queens & mask)
                 printf("| Q ");
-            else if (board.w_king & mask)
+            else if (p.w_king & mask)
                 printf("| K ");
-            else if (board.b_pawns & mask)
+            else if (p.b_pawns & mask)
                 printf("| p ");
-            else if (board.b_rooks & mask)
+            else if (p.b_rooks & mask)
                 printf("| r ");
-            else if (board.b_knights & mask)
+            else if (p.b_knights & mask)
                 printf("| n ");
-            else if (board.b_bishops & mask)
+            else if (p.b_bishops & mask)
                 printf("| b ");
-            else if (board.b_queens & mask)
+            else if (p.b_queens & mask)
                 printf("| q ");
-            else if (board.b_king & mask)
+            else if (p.b_king & mask)
                 printf("| k ");
             else
                 printf("|   ");

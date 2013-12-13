@@ -68,7 +68,7 @@ struct move {
     bool promotion;
 };
 
-extern const struct position start_pos;
+extern const struct position startpos;
 
 bitboard rank_mask(enum eRank rank);
 bitboard file_mask(enum eFile file);
