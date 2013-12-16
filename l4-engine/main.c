@@ -14,13 +14,10 @@
 
 int main ()
 {
-    
     // setvbuf(stream, NULL, _IONBF, 0);
     
-    print_position(startpos);
-    // uci_input();
+    uci_input();
     
-    printf("%" PRIx64 "\n", file_mask(0));
 	return 0;
 }
    

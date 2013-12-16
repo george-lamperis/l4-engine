@@ -1,9 +1,9 @@
 #ifndef L4_ENGINE_H
 #define L4_ENGINE_H
 
-#include <stdbool.h>
 #include <stdint.h>
 #include <inttypes.h>
+#include <stdbool.h>    // TODO what if __cplusplus
 
 #ifdef __cplusplus
 extern "C" {
@@ -74,29 +74,18 @@ bitboard rank_mask(enum eRank rank);
 bitboard file_mask(enum eFile file);
 bitboard square_mask(enum eSquare sq);
 
-bitboard all_white(struct position p);
-bitboard all_black(struct position p);
+bitboard all_white(struct position pos);
+bitboard all_black(struct position pos);
+bitboard all_black(struct position pos);
 bool positions_equal(struct position a, struct position b);
 
 int bit_count(bitboard b);
 void print_bitboard(bitboard b);
-void print_position(struct position p);
+void print_position(struct position pos);
+char* to_fen(struct position pos);
 
+struct position make_move(struct move, struct position pos);
 // TODO something to assert that each set is disjoint
-
-// -----------------------------------------------------------------------------
-// search.c
-// contains code which generates all legal moves
-// -----------------------------------------------------------------------------
-
-struct position make_move(struct move, struct position board);
-
-void search_moves(const struct position);
-
-// -----------------------------------------------------------------------------
-// evaluate.c
-// contains logic to assign a score to a chess position.
-// -----------------------------------------------------------------------------
 
 // -----------------------------------------------------------------------------
 // uci.c

@@ -28,4 +28,3 @@ void uci_input()
 {
     char buffer[256];
 }
-

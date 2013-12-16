@@ -130,9 +130,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="bitboard.c" />
-    <ClCompile Include="evaluate.c" />
     <ClCompile Include="main.c" />
-    <ClCompile Include="search.c" />
     <ClCompile Include="uci.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

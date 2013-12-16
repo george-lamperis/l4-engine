@@ -140,7 +140,6 @@
   <ItemGroup>
     <ClCompile Include="test_bitboard.cpp" />
     <ClCompile Include="test_main.cpp" />
-    <ClCompile Include="test_search.cpp" />
     <ClCompile Include="test_uci.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

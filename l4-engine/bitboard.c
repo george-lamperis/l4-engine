@@ -54,7 +54,32 @@ bitboard square_mask(enum eSquare sq)
 bool positions_equal(struct position a, struct position b)
 {
     bool b1 = a.w_pawns == b.w_pawns;
+    bool b1 = a.w_rooks == b.w_rooks;
+    bool b1 = a.w_knights == b.w_knights;
+    bool b1 = a.w_bishops == b.w_bishops;
+    bool b1 = a.w_queens == b.w_queens;
+    bool b1 = a.w_king == b.w_king;
 
+    bool b1 = a.b_pawns == b.b_pawns;
+    bool b1 = a.b_rooks == b.b_rooks;
+    bool b1 = a.b_knights == b.b_knights;
+    bool b1 = a.b_bishops == b.b_bishops;
+    bool b1 = a.b_queens == b.b_queens;
+    bool b1 = a.b_king == b.b_king;
+    // at most one bit set. That bit is the location
+    // of the pawn which moved two spaces forward.
+    bitboard en_passant; // TODO it could also be an enum
+
+    int halfmove;
+    int fullmove;
+
+    // castling
+    bool w_kingside;
+    bool w_queenside;
+    bool b_kingside;
+    bool b_queenside;
+
+    bool whites_turn;
     return false;
 }
 

@@ -1,6 +1,12 @@
 #include <gtest/gtest.h>
 #include "l4engine.h"
 
-TEST(compare_chessboard, simpletest) {
-    EXPECT_TRUE(compare_chessboards(chess_initial_state, chess_initial_state));
+TEST(ComparePositionTest, Equal) {
+    EXPECT_TRUE(positions_equal(startpos, startpos));
+}
+
+TEST(TestComparePosition, NotEqual) {
+    struct position pos = startpos;
+    // pos.b_queens = 0;
+    EXPECT_FALSE(positions_equal(pos, startpos));
 }
