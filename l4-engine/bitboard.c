@@ -51,6 +51,52 @@ bitboard square_mask(enum eSquare sq)
 }
 
 
+bitboard all_white(struct position pos)
+{
+    return (
+        pos.w_pawns |
+        pos.w_rooks |
+        pos.w_knights |
+        pos.w_bishops |
+        pos.w_queens |
+        pos.w_king
+    );
+}
+
+
+bitboard all_black(struct position pos)
+{
+    return (
+        pos.b_pawns |
+        pos.b_rooks |
+        pos.b_knights |
+        pos.b_bishops |
+        pos.b_queens |
+        pos.b_king
+    );
+}
+
+
+bitboard all_pieces(struct position pos)
+{
+    return (
+        pos.w_pawns |
+        pos.w_rooks |
+        pos.w_knights |
+        pos.w_bishops |
+        pos.w_queens |
+        pos.w_king |
+
+        pos.b_pawns |
+        pos.b_rooks |
+        pos.b_knights |
+        pos.b_bishops |
+        pos.b_queens |
+        pos.b_king
+    );
+}
+
+
 bool positions_equal(struct position a, struct position b)
 {
     return (
