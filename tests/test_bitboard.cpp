@@ -7,6 +7,6 @@ TEST(ComparePositionTest, Equal) {
 
 TEST(TestComparePosition, NotEqual) {
     struct position pos = startpos;
-    // pos.b_queens = 0;
+    pos.b_queens = 0;
     EXPECT_FALSE(positions_equal(pos, startpos));
 }

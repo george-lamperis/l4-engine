@@ -53,34 +53,31 @@ bitboard square_mask(enum eSquare sq)
 
 bool positions_equal(struct position a, struct position b)
 {
-    bool b1 = a.w_pawns == b.w_pawns;
-    bool b1 = a.w_rooks == b.w_rooks;
-    bool b1 = a.w_knights == b.w_knights;
-    bool b1 = a.w_bishops == b.w_bishops;
-    bool b1 = a.w_queens == b.w_queens;
-    bool b1 = a.w_king == b.w_king;
+    return (
+        (a.w_pawns == b.w_pawns) &&
+        (a.w_rooks == b.w_rooks) &&
+        (a.w_knights == b.w_knights) &&
+        (a.w_bishops == b.w_bishops) &&
+        (a.w_queens == b.w_queens) &&
+        (a.w_king == b.w_king) &&
 
-    bool b1 = a.b_pawns == b.b_pawns;
-    bool b1 = a.b_rooks == b.b_rooks;
-    bool b1 = a.b_knights == b.b_knights;
-    bool b1 = a.b_bishops == b.b_bishops;
-    bool b1 = a.b_queens == b.b_queens;
-    bool b1 = a.b_king == b.b_king;
-    // at most one bit set. That bit is the location
-    // of the pawn which moved two spaces forward.
-    bitboard en_passant; // TODO it could also be an enum
+        (a.b_pawns == b.b_pawns) &&
+        (a.b_rooks == b.b_rooks) &&
+        (a.b_knights == b.b_knights) &&
+        (a.b_bishops == b.b_bishops) &&
+        (a.b_queens == b.b_queens) &&
+        (a.b_king == b.b_king) &&
 
-    int halfmove;
-    int fullmove;
+        (a.en_passant == a.en_passant) &&
+        (a.halfmove == b.halfmove) &&
+        (a.fullmove == b.fullmove) &&
 
-    // castling
-    bool w_kingside;
-    bool w_queenside;
-    bool b_kingside;
-    bool b_queenside;
-
-    bool whites_turn;
-    return false;
+        (a.w_kingside == b.w_kingside) &&
+        (a.w_queenside == b.w_queenside) &&
+        (a.b_kingside == b.b_kingside) &&
+        (a.b_queenside == b.b_queenside) &&
+        (a.whites_turn == b.whites_turn)
+    );
 }
 
 // Brian Kernighan's way
