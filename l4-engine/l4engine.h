@@ -74,7 +74,7 @@ bitboard square_mask(enum eSquare sq);
 
 bitboard all_white(struct position pos);
 bitboard all_black(struct position pos);
-bitboard all_peices(struct position pos);
+bitboard all_pieces(struct position pos);
 bool positions_equal(struct position a, struct position b);
 
 int bit_count(bitboard b);
