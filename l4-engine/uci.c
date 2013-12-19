@@ -38,7 +38,7 @@ void uci_input()
 struct position parse_pieces(const char *pieces)
 {
     struct position pos = { 0 };
-
+    
     int i = 0;
     int length = strlen(pieces);
     int rank = 7;
@@ -108,10 +108,21 @@ struct position parse_position(const char *pos_str)
     strcpy(buffer, pos_str);  
 
     char *t = strtok(buffer, " \t\n");
+    int count = 0;
 
     while (t != NULL) {
-        printf("%s\n", t);
+        switch (count) {
+        case 0:     // "position"
+            break;
+        case 1:     // piece configuration
+            break;
+        default:
+            // exit?
+            break;
+        }
+
         t = strtok(NULL, " \t\n");
+        count++;
     }
 
     return (struct position) { 0 };
