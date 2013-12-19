@@ -99,9 +99,18 @@ bool position_legal(struct position pos);
 // and controlling program execution.
 // -----------------------------------------------------------------------------
 
-//const char WHITE_PAWN = 'W';
-// ... 
-//const char BLACK_PAWN = 'w';
+#define WHITE_PAWN      'W'
+#define WHITE_ROOK      'R'
+#define WHITE_KNIGHT    'N'
+#define WHITE_BISHOP    'B'
+#define WHITE_QUEEN     'Q'
+#define WHITE_KING      'K'
+#define BLACK_PAWN      'w'
+#define BLACK_ROOK      'r'
+#define BLACK_KNIGHT    'n'
+#define BLACK_BISHOP    'b'
+#define BLACK_QUEEN     'q'
+#define BLACK_KING      'k'
 
 enum eEngineState {
     IDLE, 
@@ -111,19 +120,17 @@ enum eEngineState {
 
 // QKRBNP for white pieces, lowercase for black
 // http://en.wikipedia.org/wiki/Forsyth%E2%80%93Edwards_Notation
-struct position parse_fen(const char *fen);
-struct position parse_pos(const char *pos);
+struct position parse_position(const char *pos);
+// to_fen(); ?
 
+void perft(int depth);
+
+void uci_input();
 void uci_identify();
 void uci_option();
 void uci_readyok();
 
 // uci_info(int depth, score, ...);
-
-// NEXT
-// fenstrings
-// assert disjoint
-// test bitcount?
 
 
 #ifdef __cplusplus

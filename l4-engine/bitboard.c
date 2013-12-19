@@ -165,6 +165,7 @@ void print_bitboard(bitboard b)
     }
 
     printf("\t    a   b   c   d   e   f   g   h  \n");
+    fflush(stdout);
 }
 
 
@@ -215,4 +216,5 @@ void print_position(struct position p)
     }
 
     printf("\t    a   b   c   d   e   f   g   h  \n");
+    fflush(stdout);
 }
