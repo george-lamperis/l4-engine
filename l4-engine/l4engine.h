@@ -9,10 +9,7 @@
 extern "C" {
 #endif
 
-// -----------------------------------------------------------------------------
-// bitboard.c
-// stuff involving the bitboard encoding
-// -----------------------------------------------------------------------------
+
 typedef uint64_t bitboard;
 
 enum eRank { RANK_1, RANK_2, RANK_3, RANK_4, RANK_5, RANK_6, RANK_7, RANK_8 };
@@ -66,6 +63,10 @@ struct move {
     bool promotion;
 };
 
+// -----------------------------------------------------------------------------
+// bitboard.c
+// stuff involving the bitboard encoding
+// -----------------------------------------------------------------------------
 extern const struct position startpos;
 
 bitboard rank_mask(enum eRank rank);
@@ -80,10 +81,17 @@ bool positions_equal(struct position a, struct position b);
 int bit_count(bitboard b);
 void print_bitboard(bitboard b);
 void print_position(struct position pos);
-char* to_fen(struct position pos);
-
-struct position make_move(struct move, struct position pos);
 // TODO something to assert that each set is disjoint
+
+// -----------------------------------------------------------------------------
+// move.c 
+// move generation stuff
+// -----------------------------------------------------------------------------
+struct position make_move(struct move, struct position pos);
+
+void generate_moves(struct position pos /*, <list of moves object> */);
+bool move_legal(struct move mv, struct position pos);
+bool position_legal(struct position pos);
 
 // -----------------------------------------------------------------------------
 // uci.c
