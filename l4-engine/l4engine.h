@@ -120,7 +120,7 @@ enum eEngineState {
 
 // QKRBNP for white pieces, lowercase for black
 // http://en.wikipedia.org/wiki/Forsyth%E2%80%93Edwards_Notation
-struct position parse_position(const char *pos);
+struct position parse_position(const char *pos_str);
 // to_fen(); ?
 
 void perft(int depth);

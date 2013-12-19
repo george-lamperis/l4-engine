@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
+#include <assert.h>
 
 #include "l4engine.h"
 
@@ -88,24 +89,29 @@ struct position parse_pieces(const char *pieces)
             break;
         }
 
-    }
+    } // end while()
 
     return pos;
 }
 
 
-struct position parse_position(const char *pos)
+/*
+ * parses the input of UCI's position command, returns a struct containing
+ * that position.
+ */
+struct position parse_position(const char *pos_str)
 {
-    char fen[BUFFER_SIZE];
-    char moves[BUFFER_SIZE];
-    sscanf(pos, "position %s moves %s\n", fen, moves);
+    assert(strlen(pos_str) < BUFFER_SIZE);
 
-    // parse fen
-    int length = strlen(fen);
-    for (int i = 0; i < length; i++) {
-        char c = fen[i];
+    // make a copy, strtok() is picky
+    char buffer[BUFFER_SIZE];
+    strcpy(buffer, pos_str);  
 
+    char *t = strtok(buffer, " \t\n");
 
+    while (t != NULL) {
+        printf("%s\n", t);
+        t = strtok(NULL, " \t\n");
     }
 
     return (struct position) { 0 };
