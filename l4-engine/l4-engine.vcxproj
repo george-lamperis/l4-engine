@@ -134,6 +134,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="bitboard.c" />
+    <ClCompile Include="fen.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="uci.c" />
   </ItemGroup>

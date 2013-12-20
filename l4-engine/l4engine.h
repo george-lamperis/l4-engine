@@ -8,6 +8,9 @@
 #define DEBUGGING
 // also one macro for enabling/disabling asserts
 
+#define BUFFER_SIZE 256
+
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -96,12 +99,13 @@ void generate_moves(struct position pos /*, <list of moves object> */);
 bool move_legal(struct move mv, struct position pos);
 bool position_legal(struct position pos);
 
-// -----------------------------------------------------------------------------
-// uci.c
-// contains functions for interfacing with UCI 
-// and controlling program execution.
-// -----------------------------------------------------------------------------
 
+
+// -----------------------------------------------------------------------------
+// fen.c
+// parsing fen strings and move lists
+// TODO maybe move printing functions here?
+// -----------------------------------------------------------------------------
 #define WHITE_PAWN      'P'
 #define WHITE_ROOK      'R'
 #define WHITE_KNIGHT    'N'
@@ -115,16 +119,22 @@ bool position_legal(struct position pos);
 #define BLACK_QUEEN     'q'
 #define BLACK_KING      'k'
 
+struct position parse_position(const char *pos_str);
+void to_fen(char *buffer, struct position pos);
+
+
+// -----------------------------------------------------------------------------
+// uci.c
+// contains functions for interfacing with UCI
+// and controlling program execution.
+// -----------------------------------------------------------------------------
 enum eEngineState {
     IDLE, 
     THINKING,
     PONDERING, 
 };
 
-// QKRBNP for white pieces, lowercase for black
-// http://en.wikipedia.org/wiki/Forsyth%E2%80%93Edwards_Notation
-struct position parse_position(const char *pos_str);
-// to_fen(); ?
+
 
 void perft(int depth);
 
