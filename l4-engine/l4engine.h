@@ -5,6 +5,9 @@
 #include <inttypes.h>
 #include <stdbool.h>    // TODO what if __cplusplus
 
+#define DEBUGGING
+// also one macro for enabling/disabling asserts
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -99,13 +102,13 @@ bool position_legal(struct position pos);
 // and controlling program execution.
 // -----------------------------------------------------------------------------
 
-#define WHITE_PAWN      'W'
+#define WHITE_PAWN      'P'
 #define WHITE_ROOK      'R'
 #define WHITE_KNIGHT    'N'
 #define WHITE_BISHOP    'B'
 #define WHITE_QUEEN     'Q'
 #define WHITE_KING      'K'
-#define BLACK_PAWN      'w'
+#define BLACK_PAWN      'p'
 #define BLACK_ROOK      'r'
 #define BLACK_KNIGHT    'n'
 #define BLACK_BISHOP    'b'

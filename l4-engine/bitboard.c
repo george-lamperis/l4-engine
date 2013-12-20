@@ -114,7 +114,7 @@ bool positions_equal(struct position a, struct position b)
         (a.b_queens == b.b_queens) &&
         (a.b_king == b.b_king) &&
 
-        (a.en_passant == a.en_passant) &&
+        (a.en_passant == b.en_passant) &&
         (a.halfmove == b.halfmove) &&
         (a.fullmove == b.fullmove) &&
 
