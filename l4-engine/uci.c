@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
 #include <assert.h>
@@ -35,63 +36,76 @@ void uci_input()
 }
 
 
-struct position parse_pieces(const char *pieces)
+// Helper function
+void parse_pieces(char *pieces, struct position *pos)
 {
-    struct position pos = { 0 };
-    
     int i = 0;
     int length = strlen(pieces);
-    int rank = 7;
-    int file = 0;
+    int square_counter = 0;
 
     while (i < length) {
-        enum eSquare sq= (8 * rank) + file;
-        bitboard mask = square_mask(sq);
-
-        if (file == 7) {
-            file = 0;
-            rank--;
-        }
-
         char c = pieces[i];
         i++;
-
-        if (isdigit(c)) {
-            ;
+    
+        if ( isdigit(c) ) {
+            int offset = c - '0';
+            square_counter += offset;
+            continue;
+        } else if ( isspace(c) || (c == '/') ){
+            continue;
         }
 
+        int rank = 7 - (square_counter / 8);
+        int file = square_counter % 8;
+        bitboard mask = square_mask(8 * rank + file);
+        square_counter++;
+
+        printf("%d\n", square_counter);
+
         switch (c) {
-        case '/':
-            break;
         case WHITE_PAWN:
+            pos->w_pawns |= mask;
             break;
         case WHITE_ROOK:
+            pos->w_rooks |= mask;
             break;
         case WHITE_KNIGHT:
+            pos->w_knights |= mask;
             break;
         case WHITE_BISHOP:
+            pos->w_bishops |= mask;
             break;
         case WHITE_QUEEN:
+            pos->w_queens |= mask;
             break;
         case WHITE_KING:
+            pos->w_king |= mask;
             break;
         case BLACK_PAWN:
+            pos->b_pawns |= mask;
             break;
         case BLACK_ROOK:
+            pos->b_rooks |= mask;
             break;
         case BLACK_KNIGHT:
+            pos->b_knights |= mask;
             break;
         case BLACK_BISHOP:
+            pos->b_bishops |= mask;
             break;
         case BLACK_QUEEN:
+            pos->b_queens |= mask;
             break;
         case BLACK_KING:
+            pos->b_king |= mask;
             break;
+        //default:
+            //exit(EXIT_FAILURE);
         }
 
     } // end while()
 
-    return pos;
+    assert(square_counter == 64);
 }
 
 
@@ -107,14 +121,16 @@ struct position parse_position(const char *pos_str)
     char buffer[BUFFER_SIZE];
     strcpy(buffer, pos_str);  
 
-    char *t = strtok(buffer, " \t\n");
+    struct position pos = { 0 };
     int count = 0;
+    char *t = strtok(buffer, " \t\n");
 
     while (t != NULL) {
         switch (count) {
         case 0:     // "position"
             break;
         case 1:     // piece configuration
+            parse_pieces(t, &pos);
             break;
         default:
             // exit?
@@ -125,7 +141,8 @@ struct position parse_position(const char *pos_str)
         count++;
     }
 
-    return (struct position) { 0 };
+    pos.en_passant = 1;
+    return pos;
 }
 
 void perft(int n)
