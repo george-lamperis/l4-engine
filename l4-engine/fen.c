@@ -6,6 +6,7 @@
 
 #include "l4engine.h"
 
+
 // Helper function
 void parse_pieces(char *pieces, struct position *pos)
 {
@@ -76,6 +77,60 @@ void parse_pieces(char *pieces, struct position *pos)
 }
 
 
+void parse_color(char *color, struct position *pos)
+{
+    assert(strlen(color) == 1);
+
+    if (color[0] == 'w')
+        pos->whites_turn = true;
+    else
+        pos->whites_turn = false;
+}
+
+
+void parse_castling(char *castling, struct position *pos)
+{
+    // make sure all initialized to false
+    pos->w_kingside = false;
+    pos->w_queenside = false;
+    pos->b_kingside = false;
+    pos->b_queenside = false;
+
+    int length = strlen(castling);
+    for (int i = 0; i < length; i++) {
+        switch (castling[i]) {
+        case WHITE_KING:
+            pos->w_kingside = true;
+            break;
+        case WHITE_QUEEN:
+            pos->w_queenside = true;
+            break;
+        case BLACK_KING:
+            pos->b_kingside = true;
+            break;
+        case BLACK_QUEEN:
+            pos->b_queenside = true;
+            break;
+        default:
+            break;
+        }
+    }
+}
+
+
+void parse_enpassant(char *ep, struct position *pos)
+{
+    if (strcmp(ep, "-") == 0) {
+        pos->en_passant = 0;
+    } else {
+        int file = ep[0] - 'a';
+        int rank = ep[1] - '1';
+
+        pos->en_passant = square_mask(8 * rank + file);
+    }
+}
+
+
 /*
 * parses the input of UCI's position command, returns a struct containing
 * that position.
@@ -97,11 +152,19 @@ struct position parse_position(const char *pos_str)
         parse_pieces(t, &pos);
 
         t = strtok(NULL, " \t\n");  // active color
-        t = strtok(NULL, " \t\n");  // castling
-        t = strtok(NULL, " \t\n");  // en passant
-        t = strtok(NULL, " \t\n");  // half move
-        t = strtok(NULL, " \t\n");  // full move
+        parse_color(t, &pos);
 
+        t = strtok(NULL, " \t\n");  // castling
+        parse_castling(t, &pos);
+
+        t = strtok(NULL, " \t\n");  // en passant
+        parse_enpassant(t, &pos);
+
+        t = strtok(NULL, " \t\n");  // half move
+        pos.halfmove = atoi(t);
+
+        t = strtok(NULL, " \t\n");  // full move
+        pos.fullmove = atoi(t);
     }
 
     t = strtok(NULL, " \t\n");      // "moves" or NULL

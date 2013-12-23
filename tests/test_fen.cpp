@@ -10,7 +10,6 @@ TEST(ParsePositionTest, CompactStartpos) {
 TEST(ParsePositionTest, LongStartpos) {
     const char *s = "position rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1\n";
     struct position actual = parse_position(s);
-    print_position(actual);
     EXPECT_TRUE(positions_equal(startpos, actual));
 }
 
