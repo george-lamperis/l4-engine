@@ -57,3 +57,5 @@ Neighbors compass rose:
     | -9 | -8 | -7 |
     +----+----+----+
 ```
+
+en_passant will have the bit set of the square behind the elligible pawn.

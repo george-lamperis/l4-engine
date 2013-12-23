@@ -5,7 +5,8 @@
 #include <inttypes.h>
 #include <stdbool.h>    // TODO what if __cplusplus
 
-#define DEBUGGING
+#define DEBUGGING true
+
 // also one macro for enabling/disabling asserts
 
 #define BUFFER_SIZE 256
@@ -134,17 +135,16 @@ enum eEngineState {
     PONDERING, 
 };
 
+extern enum eEngineState engine_state;
+extern struct bestmove;
 
 
 void perft(int depth);
 
-void uci_input();
-void uci_identify();
+void uci_loop();
+void uci_position();
 void uci_option();
-void uci_readyok();
-
-// uci_info(int depth, score, ...);
-
+void uci_go();
 
 #ifdef __cplusplus
 }
