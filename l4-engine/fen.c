@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
 #include <assert.h>
@@ -20,8 +21,7 @@ void parse_pieces(char *pieces, struct position *pos)
             int offset = c - '0';
             square_counter += offset;
             continue;
-        }
-        else if (isspace(c) || (c == '/')){
+        } else if (c == '/') {
             continue;
         }
 
@@ -29,8 +29,6 @@ void parse_pieces(char *pieces, struct position *pos)
         int file = square_counter % 8;
         bitboard mask = square_mask(8 * rank + file);
         square_counter++;
-
-        printf("%d\n", square_counter);
 
         switch (c) {
         case WHITE_PAWN:
@@ -69,10 +67,9 @@ void parse_pieces(char *pieces, struct position *pos)
         case BLACK_KING:
             pos->b_king |= mask;
             break;
-            //default:
-            //exit(EXIT_FAILURE);
-        }
-
+        default:
+            exit(EXIT_FAILURE);
+        } // end switch
     } // end while()
 
     assert(square_counter == 64);
@@ -87,44 +84,30 @@ struct position parse_position(const char *pos_str)
 {
     assert(strlen(pos_str) < BUFFER_SIZE);
 
-    // make a copy, strtok() is picky
     char buffer[BUFFER_SIZE];
-    strcpy(buffer, pos_str);
-
     struct position pos = { 0 };
-    char *t = strtok(buffer, " \t\n");
-    int count = 0;
+    
+    strcpy(buffer, pos_str);            // make a copy, strtok() is picky
+    strtok(buffer, " \t\n");            // discard "position"
+    char *t = strtok(NULL, " \t\n");    // piece configuration
 
-
-    if (strstr(buffer, "position startpos ")) {
+    if (strcmp(t, "startpos") == 0) {
         pos = startpos;
-    }
-    else {
-        char *t = strtok(buffer, " \t\n");  // discard "position"
-        t = strtok(NULL, " \t\n");          // piece configuration
+    } else {
         parse_pieces(t, &pos);
 
-        t = strtok(NULL, " \t\n");          // a
+        t = strtok(NULL, " \t\n");  // active color
+        t = strtok(NULL, " \t\n");  // castling
+        t = strtok(NULL, " \t\n");  // en passant
+        t = strtok(NULL, " \t\n");  // half move
+        t = strtok(NULL, " \t\n");  // full move
+
     }
 
+    t = strtok(NULL, " \t\n");      // "moves" or NULL
+    if (t != NULL) {
+        // parse moves
+    }
 
-
-    //while (t != NULL) {
-    //    switch (count) {
-    //    case 0:     // "position"
-    //        break;
-    //    case 1:     // piece configuration
-    //        parse_pieces(t, &pos);
-    //        break;
-    //    default:
-    //        // exit?
-    //        break;
-    //    }
-
-    //    t = strtok(NULL, " \t\n");
-    //    count++;
-    //}
-
-    pos.en_passant = 1;
     return pos;
 }
