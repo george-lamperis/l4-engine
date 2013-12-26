@@ -13,6 +13,22 @@ TEST(ParsePositionTest, LongStartpos) {
     EXPECT_TRUE(positions_equal(startpos, actual));
 }
 
+TEST(ParsePositionTest, HandlesActiveColor) {
+
+}
+
+TEST(ParsePositionTest, HandlesCastling) {
+
+}
+
+TEST(ParsePositionTest, HandlesEnPassant) {
+
+}
+
+TEST(ParsePositionTest, HandlesCounters) {
+
+}
+
 TEST(ParsePositionTest, CompactMovesList) {
     const char *case2 = "position startpos moves b2b3\n";
 }
@@ -20,3 +36,5 @@ TEST(ParsePositionTest, CompactMovesList) {
 TEST(ParsePositionTest, LongMovesList) {
 
 }
+
+// TODO whitespace handling?
