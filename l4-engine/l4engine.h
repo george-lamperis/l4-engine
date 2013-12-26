@@ -63,12 +63,7 @@ struct position {
     bool whites_turn;
 };
 
-struct move {
-    enum eSquare from;
-    enum eSquare to;
-    bool capture;
-    bool promotion;
-};
+
 
 // -----------------------------------------------------------------------------
 // bitboard.c
@@ -91,16 +86,36 @@ void print_position(struct position pos);
 // TODO something to assert that each set is disjoint
 
 // -----------------------------------------------------------------------------
-// move.c 
+// moves.c 
 // move generation stuff
 // -----------------------------------------------------------------------------
+
+struct move {
+    enum eSquare from;
+    enum eSquare to;
+    bool capture;
+    bool promotion;
+};
+
 struct position make_move(struct move, struct position pos);
 
-void generate_moves(struct position pos /*, <list of moves object> */);
+int generate_moves(struct position pos, struct move *cursor, int *remaining);
+int sliding_moves(struct position pos, struct move *cursor, int *remaining);
+int pawn_moves(struct position pos, struct move *cursor, int *remaining);
+int enpassant_moves(struct position pos, struct move *cursor, int *remaining);
+int knight_moves(struct position pos, struct move *cursor, int *remaining);
+int king_moves(struct position pos, struct move *cursor, int *remaining);
+
 bool move_legal(struct move mv, struct position pos);
 bool position_legal(struct position pos);
 
+// -----------------------------------------------------------------------------
+// eval.c
+// tell us stuff about a position
+// -----------------------------------------------------------------------------
 
+bool check(struct position pos);
+bool checkmate(struct position pos);
 
 // -----------------------------------------------------------------------------
 // fen.c

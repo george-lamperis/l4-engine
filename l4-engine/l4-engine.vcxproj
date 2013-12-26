@@ -136,6 +136,7 @@
     <ClCompile Include="bitboard.c" />
     <ClCompile Include="fen.c" />
     <ClCompile Include="main.c" />
+    <ClCompile Include="moves.c" />
     <ClCompile Include="uci.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
