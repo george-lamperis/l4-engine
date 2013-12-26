@@ -69,7 +69,8 @@ void parse_pieces(char *pieces, struct position *pos)
             pos->b_king |= mask;
             break;
         default:
-            exit(EXIT_FAILURE);
+            // TODO end execution?
+            break;
         } // end switch
     } // end while()
 
@@ -132,9 +133,11 @@ void parse_enpassant(char *ep, struct position *pos)
 
 
 /*
-* parses the input of UCI's position command, returns a struct containing
-* that position.
-*/
+ * parses the input of UCI's position command, returns a struct containing
+ * that position.
+ *
+ * TODO: save the move list?
+ */
 struct position parse_position(const char *pos_str)
 {
     assert(strlen(pos_str) < BUFFER_SIZE);
@@ -169,6 +172,8 @@ struct position parse_position(const char *pos_str)
 
     t = strtok(NULL, " \t\n");      // "moves" or NULL
     if (t != NULL) {
+        assert(strcmp(t, "moves") == 0);
+
         // parse moves
     }
 

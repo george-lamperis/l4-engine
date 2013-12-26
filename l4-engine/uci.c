@@ -7,7 +7,7 @@
 
 #include "l4engine.h"
 
-
+// use a lock before reading/writing these
 enum eEngineState engine_state = IDLE;
 struct move bestmove = { 0 };
 
