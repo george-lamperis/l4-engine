@@ -12,7 +12,7 @@ data Position = Position { pawns :: Bitboard
                          , knights :: Bitboard
                          , bishops :: Bitboard
                          , queens :: Bitboard
-                         , king :: Bitboard
+                         , kings :: Bitboard
                          , black :: Bitboard
                          , white :: Bitboard
                          , whites_turn :: Bool
@@ -27,7 +27,7 @@ startPosition = Position {pawns   = 0x00ff00000000ff00,
                           knights = 0x4200000000000042,
                           bishops = 0x2400000000000024,
                           queens  = 0x0800000000000008,
-                          king    = 0x1000000000000010,
+                          kings   = 0x1000000000000010,
                           black   = 0xFFFF000000000000,
                           white   = 0x000000000000FFFF,
                           whites_turn = True
@@ -39,6 +39,11 @@ startPosition = Position {pawns   = 0x00ff00000000ff00,
 pieceAtIndex :: Position => Int -> Piece
 pieceAtIndex pos idx
     | testBit (pawns pos) idx = Pawn
+    | testBit (rooks pos) idx = Rook
+    | testBit (knights pos) idx = Knight
+    | testBit (bishops pos) idx = Bishop
+    | testBit (queens pos) idx = Queen
+    | testBit (kings pos) idx = King
     | otherwise = NotOccupied
 
 -- Returns an ASCII chessboard graphic of the position.
@@ -57,4 +62,4 @@ prettyShow pos =
 main = do
     putStrLn "Hello, World!"
     putStrLn (showHex (pawns startPosition) "")
-    putStrLn (show (pieceAtIndex startPosition 25))
+    putStrLn (show (pieceAtIndex startPosition 8))
