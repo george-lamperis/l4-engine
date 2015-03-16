@@ -18,8 +18,9 @@ data Position = Position { pawns :: Bitboard
                          , whites_turn :: Bool
                          } deriving (Show, Eq)
 
-data Piece = Pawn | Rook | Knight | Bishop | Queen | King | NotOccupied
-             deriving (Show)
+data Piece = BlackPawn | BlackRook | BlackKnight | BlackBishop | BlackQueen |
+             BlackKing | WhitePawn | WhiteRook | WhiteKnight | WhiteBishop |
+             WhiteQueen | WhiteKing | NotOccupied deriving (Show)
 
 startPosition :: Position
 startPosition = Position {pawns   = 0x00ff00000000ff00,
@@ -28,26 +29,65 @@ startPosition = Position {pawns   = 0x00ff00000000ff00,
                           bishops = 0x2400000000000024,
                           queens  = 0x0800000000000008,
                           kings   = 0x1000000000000010,
-                          black   = 0xFFFF000000000000,
-                          white   = 0x000000000000FFFF,
+                          black   = 0xffff000000000000,
+                          white   = 0x000000000000ffff,
                           whites_turn = True
                          }
 
---blackPawns :: Position => Bitboard
---blackPawns pos = (pawns pos) & (black pos)
+blackPawns :: Position -> Bitboard
+blackPawns pos = (pawns pos) .&. (black pos)
 
-pieceAtIndex :: Position => Int -> Piece
+blackRooks :: Position -> Bitboard
+blackRooks pos = (rooks pos) .&. (black pos)
+
+blackKnights :: Position -> Bitboard
+blackKnights pos = (knights pos) .&. (black pos)
+
+blackBishops :: Position -> Bitboard
+blackBishops pos = (bishops pos) .&. (black pos)
+
+blackQueens :: Position -> Bitboard
+blackQueens pos = (queens pos) .&. (black pos)
+
+blackKing :: Position -> Bitboard
+blackKing pos = (kings pos) .&. (black pos)
+
+whitePawns :: Position -> Bitboard
+whitePawns pos = (pawns pos) .&. (white pos)
+
+whiteRooks :: Position -> Bitboard
+whiteRooks pos = (rooks pos) .&. (white pos)
+
+whiteKnights :: Position -> Bitboard
+whiteKnights pos = (knights pos) .&. (white pos)
+
+whiteBishops :: Position -> Bitboard
+whiteBishops pos = (bishops pos) .&. (white pos)
+
+whiteQueens :: Position -> Bitboard
+whiteQueens pos = (queens pos) .&. (white pos)
+
+whiteKing :: Position -> Bitboard
+whiteKing pos = (kings pos) .&. (white pos)
+
+pieceAtIndex :: Position -> Int -> Piece
 pieceAtIndex pos idx
-    | testBit (pawns pos) idx = Pawn
-    | testBit (rooks pos) idx = Rook
-    | testBit (knights pos) idx = Knight
-    | testBit (bishops pos) idx = Bishop
-    | testBit (queens pos) idx = Queen
-    | testBit (kings pos) idx = King
+    | testBit (blackPawns pos) idx = BlackPawn
+    | testBit (blackRooks pos) idx = BlackRook
+    | testBit (blackKnights pos) idx = BlackKnight
+    | testBit (blackBishops pos) idx = BlackBishop
+    | testBit (blackQueens pos) idx = BlackQueen
+    | testBit (blackKing pos) idx = BlackKing
+    | testBit (whitePawns pos) idx = WhitePawn
+    | testBit (whiteRooks pos) idx = WhiteRook
+    | testBit (whiteKnights pos) idx = WhiteKnight
+    | testBit (whiteBishops pos) idx = WhiteBishop
+    | testBit (whiteQueens pos) idx = WhiteQueen
+    | testBit (whiteKing pos) idx = WhiteKing
     | otherwise = NotOccupied
 
 -- Returns an ASCII chessboard graphic of the position.
-prettyShow :: Position => String
+prettyShow :: Position -> String
 prettyShow pos =
     let indices = [8*x + y | x <- reverse [0..7], y <- [0..7]]
     in  "\t  +---+---+---+---+---+---+---+---+\n"
