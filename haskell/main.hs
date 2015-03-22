@@ -2,6 +2,8 @@ module Main where
 
 import Data.Word (Word64)
 import Data.Bits
+import Data.List
+import Data.List.Split
 import Numeric (showHex)
 import Text.Printf
 
@@ -70,6 +72,9 @@ whiteQueens pos = (queens pos) .&. (white pos)
 whiteKing :: Position -> Bitboard
 whiteKing pos = (kings pos) .&. (white pos)
 
+allPieces :: Position -> Bitboard
+allPieces pos = (white pos) .|. (black pos)
+
 pieceAtIndex :: Position -> Int -> Piece
 pieceAtIndex pos idx
     | testBit (blackPawns pos) idx = BlackPawn
@@ -86,20 +91,42 @@ pieceAtIndex pos idx
     | testBit (whiteKing pos) idx = WhiteKing
     | otherwise = NotOccupied
 
+-- returns a String "label" of length 3 for the given piece
+pieceLabel :: Piece -> String
+pieceLabel BlackPawn   = " p "
+pieceLabel BlackRook   = " r "
+pieceLabel BlackKnight = " n "
+pieceLabel BlackBishop = " b "
+pieceLabel BlackQueen  = " q "
+pieceLabel BlackKing   = " k "
+pieceLabel WhitePawn   = " P "
+pieceLabel WhiteRook   = " R "
+pieceLabel WhiteKnight = " N "
+pieceLabel WhiteBishop = " B "
+pieceLabel WhiteQueen  = " Q "
+pieceLabel WhiteKing   = " K "
+pieceLabel NotOccupied = "   "
+
 -- Returns an ASCII chessboard graphic of the position.
 prettyShow :: Position -> String
 prettyShow pos =
     let indices = [8*x + y | x <- reverse [0..7], y <- [0..7]]
-    in  "\t  +---+---+---+---+---+---+---+---+\n"
+        pieces = map (pieceAtIndex pos) indices
+        squares = map pieceLabel pieces
+        ranks =  ["|" ++ x ++ "|" | x <- map (intercalate "|") (chunksOf 8 squares)]
+        c = zipWith (\x y -> concat ["\t", y, " ", x, " ", y, "\n"]) ranks [show z | z <- reverse [1..8]]
+    in  "\t    a   b   c   d   e   f   g   h  \n" ++
+        "\t  +---+---+---+---+---+---+---+---+\n" ++
+        intercalate "\t  +---+---+---+---+---+---+---+---+\n" c ++
+        "\t  +---+---+---+---+---+---+---+---+\n" ++
+        "\t    a   b   c   d   e   f   g   h  \n"
 
+-- TODO
+-- bitboardToHex
 -- boardFromFen
 -- boardToFen
 -- http://en.wikipedia.org/wiki/Forsyth%E2%80%93Edwards_Notation (test cases)
-
 -- naive scoring function
 
-
 main = do
-    putStrLn "Hello, World!"
-    putStrLn (showHex (pawns startPosition) "")
-    putStrLn (show (pieceAtIndex startPosition 8))
+    putStrLn (prettyShow startPosition)
