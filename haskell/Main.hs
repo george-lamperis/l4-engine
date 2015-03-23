@@ -110,16 +110,18 @@ pieceLabel NotOccupied = "   "
 -- Returns an ASCII chessboard graphic of the position.
 prettyShow :: Position -> String
 prettyShow pos =
-    let indices = [8*x + y | x <- reverse [0..7], y <- [0..7]]
-        pieces = map (pieceAtIndex pos) indices
-        squares = map pieceLabel pieces
-        ranks =  ["|" ++ x ++ "|" | x <- map (intercalate "|") (chunksOf 8 squares)]
-        c = zipWith (\x y -> concat ["\t", y, " ", x, " ", y, "\n"]) ranks [show z | z <- reverse [1..8]]
-    in  "\t    a   b   c   d   e   f   g   h  \n" ++
-        "\t  +---+---+---+---+---+---+---+---+\n" ++
-        intercalate "\t  +---+---+---+---+---+---+---+---+\n" c ++
-        "\t  +---+---+---+---+---+---+---+---+\n" ++
-        "\t    a   b   c   d   e   f   g   h  \n"
+    let fileLabels = "\t    a   b   c   d   e   f   g   h  \n"
+        divider =    "\t  +---+---+---+---+---+---+---+---+\n"
+        rankLabels = [show n | n <- [8,7..1]]
+        pieces = map (pieceAtIndex pos) [8*x + y | x <- [7,6..0], y <- [0..7]]
+        pieceLabels = map pieceLabel pieces
+        ranks = map (intercalate "|") (chunksOf 8 pieceLabels)
+    in  fileLabels ++
+        divider ++
+        intercalate divider (zipWith (\x y -> concat ["\t", x, " |", y, "| ", x, "\n"]) rankLabels ranks) ++
+        divider ++
+        fileLabels
+
 
 -- TODO
 -- bitboardToHex
@@ -127,6 +129,9 @@ prettyShow pos =
 -- boardToFen
 -- http://en.wikipedia.org/wiki/Forsyth%E2%80%93Edwards_Notation (test cases)
 -- naive scoring function
+
+-- define f & g = \pos -> f pos .&. g pos
+
 
 main = do
     putStrLn (prettyShow startPosition)
