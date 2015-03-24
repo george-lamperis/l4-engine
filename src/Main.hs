@@ -130,7 +130,6 @@ prettyShow pos =
 -- http://en.wikipedia.org/wiki/Forsyth%E2%80%93Edwards_Notation (test cases)
 -- naive scoring function
 
--- define f & g = \pos -> f pos .&. g pos
 
 
 main = do
