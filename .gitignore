@@ -1,22 +1,3 @@
-# Visual Studio files
-*.obj
-*.dll
-*.exe
-
-*.ncb
-*.tlb
-*.tlh
-*.ilk
-*.idb
-*.pdb
-
-*.log
-*.tlog
-*.lastbuildstate
-*.unsuccessfulbuild
-
-*.suo
-*.user
-*.sdf
-*.opensdf
-*.vcxproj.filters
+# sublime text files
+*.sublime-project
+*.sublime-workspace
