@@ -115,7 +115,7 @@ prettyShow pos =
         rankLabels = [show n | n <- [8,7..1]]
         pieces = map (pieceAtIndex pos) [8*x + y | x <- [7,6..0], y <- [0..7]]
         pieceLabels = map pieceLabel pieces
-        ranks = map (intercalate "|") (chunksOf 8 pieceLabels)
+        ranks = map (intercalate "  |") (chunksOf 8 pieceLabels)
     in  fileLabels ++
         divider ++
         intercalate divider (zipWith (\x y -> concat ["\t", x, " |", y, "| ", x, "\n"]) rankLabels ranks) ++
@@ -130,7 +130,9 @@ prettyShow pos =
 -- http://en.wikipedia.org/wiki/Forsyth%E2%80%93Edwards_Notation (test cases)
 -- naive scoring function
 
-
+positionToFen :: Position -> String
+positionToFen = undefined
 
 main = do
-    putStrLn (prettyShow startPosition)
+    --putStrLn (prettyShow startPosition)
+    putStrLn (positionToFen startPosition)
