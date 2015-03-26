@@ -91,21 +91,27 @@ pieceAtIndex pos idx
     | testBit (whiteKing pos) idx = WhiteKing
     | otherwise = NotOccupied
 
--- returns a String "label" of length 3 for the given piece
+-- returns a String "label" of length 1 for the given piece
 pieceLabel :: Piece -> String
-pieceLabel BlackPawn   = " p "
-pieceLabel BlackRook   = " r "
-pieceLabel BlackKnight = " n "
-pieceLabel BlackBishop = " b "
-pieceLabel BlackQueen  = " q "
-pieceLabel BlackKing   = " k "
-pieceLabel WhitePawn   = " P "
-pieceLabel WhiteRook   = " R "
-pieceLabel WhiteKnight = " N "
-pieceLabel WhiteBishop = " B "
-pieceLabel WhiteQueen  = " Q "
-pieceLabel WhiteKing   = " K "
-pieceLabel NotOccupied = "   "
+pieceLabel BlackPawn   = "p"
+pieceLabel BlackRook   = "r"
+pieceLabel BlackKnight = "n"
+pieceLabel BlackBishop = "b"
+pieceLabel BlackQueen  = "q"
+pieceLabel BlackKing   = "k"
+pieceLabel WhitePawn   = "P"
+pieceLabel WhiteRook   = "R"
+pieceLabel WhiteKnight = "N"
+pieceLabel WhiteBishop = "B"
+pieceLabel WhiteQueen  = "Q"
+pieceLabel WhiteKing   = "K"
+pieceLabel NotOccupied = " "
+
+-- returns an array of piece labels in order from a8 to h8, a7 to h7, and so on.
+pieceLabels :: Position -> [String]
+pieceLabels pos =
+    let pieces = map (pieceAtIndex pos) [8*x + y | x <- [7,6..0], y <- [0..7]]
+    in  map pieceLabel pieces
 
 -- Returns an ASCII chessboard graphic of the position.
 prettyShow :: Position -> String
@@ -113,12 +119,10 @@ prettyShow pos =
     let fileLabels = "\t    a   b   c   d   e   f   g   h  \n"
         divider =    "\t  +---+---+---+---+---+---+---+---+\n"
         rankLabels = [show n | n <- [8,7..1]]
-        pieces = map (pieceAtIndex pos) [8*x + y | x <- [7,6..0], y <- [0..7]]
-        pieceLabels = map pieceLabel pieces
-        ranks = map (intercalate "  |") (chunksOf 8 pieceLabels)
+        ranks = map (intercalate " | ") (chunksOf 8 (pieceLabels pos))
     in  fileLabels ++
         divider ++
-        intercalate divider (zipWith (\x y -> concat ["\t", x, " |", y, "| ", x, "\n"]) rankLabels ranks) ++
+        intercalate divider (zipWith (\x y -> concat ["\t", x, " | ", y, " | ", x, "\n"]) rankLabels ranks) ++
         divider ++
         fileLabels
 
@@ -134,5 +138,5 @@ positionToFen :: Position -> String
 positionToFen = undefined
 
 main = do
-    --putStrLn (prettyShow startPosition)
-    putStrLn (positionToFen startPosition)
+    putStrLn (prettyShow startPosition)
+    --putStrLn (positionToFen startPosition)
