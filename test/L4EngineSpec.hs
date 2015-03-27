@@ -1,10 +1,13 @@
-module MainSpec where
+module L4EngineSpec where
 
 import Test.Hspec
-import Main
+import L4Engine
 
 main :: IO ()
-main = hspec $ do
+main = hspec spec
+
+spec :: Spec
+spec = do
   describe "positionToFen" $ do
-    it "returns the correct string for startPosition" $
+    it "returns the correct string for startPosition" $ do
       positionToFen startPosition `shouldBe` "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
