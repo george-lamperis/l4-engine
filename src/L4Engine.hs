@@ -17,7 +17,14 @@ data Position = Position { pawns :: Bitboard
                          , kings :: Bitboard
                          , black :: Bitboard
                          , white :: Bitboard
-                         , whites_turn :: Bool
+                         , enPassant :: Bitboard
+                         , whiteKingside :: Bool
+                         , whiteQueenside :: Bool
+                         , blackKingside :: Bool
+                         , blackQueenside :: Bool
+                         , whitesTurn :: Bool
+                         , halfMove :: Int
+                         , fullMove :: Int
                          } deriving (Show, Eq)
 
 data Piece = BlackPawn | BlackRook | BlackKnight | BlackBishop | BlackQueen |
@@ -25,15 +32,22 @@ data Piece = BlackPawn | BlackRook | BlackKnight | BlackBishop | BlackQueen |
              WhiteQueen | WhiteKing | NotOccupied deriving (Show)
 
 startPosition :: Position
-startPosition = Position {pawns   = 0x00ff00000000ff00,
-                          rooks   = 0x8100000000000081,
-                          knights = 0x4200000000000042,
-                          bishops = 0x2400000000000024,
-                          queens  = 0x0800000000000008,
-                          kings   = 0x1000000000000010,
-                          black   = 0xffff000000000000,
-                          white   = 0x000000000000ffff,
-                          whites_turn = True
+startPosition = Position {pawns     = 0x00ff00000000ff00,
+                          rooks     = 0x8100000000000081,
+                          knights   = 0x4200000000000042,
+                          bishops   = 0x2400000000000024,
+                          queens    = 0x0800000000000008,
+                          kings     = 0x1000000000000010,
+                          black     = 0xffff000000000000,
+                          white     = 0x000000000000ffff,
+                          enPassant = 0x0000000000000000,
+                          whiteKingside  = True,
+                          whiteQueenside = True,
+                          blackKingside  = True,
+                          blackQueenside = True,
+                          whitesTurn = True,
+                          halfMove = 0,
+                          fullMove = 1
                          }
 
 blackPawns :: Position -> Bitboard
@@ -125,7 +139,9 @@ prettyShow pos =
         intercalate divider (zipWith (\x y -> concat ["\t", x, " | ", y, " | ", x, "\n"]) rankLabels ranks) ++
         divider ++
         fileLabels
-
+        -- castling
+        -- enPassant
+        -- move counters and active color
 
 -- TODO
 -- naive scoring function
@@ -145,14 +161,14 @@ piecePlacement pos =
 
 activeColor :: Position -> String
 activeColor pos
-    | whites_turn pos = "w"
-    | otherwise       = "b"
+    | whitesTurn pos = "w"
+    | otherwise      = "b"
 
 castling :: Position -> String
 castling pos = ""
 
-enPassant :: Position -> String
-enPassant pos = ""
+enPassantSquare :: Position -> String
+enPassantSquare pos = ""
 
 positionToFen :: Position -> String
 positionToFen pos = ""
