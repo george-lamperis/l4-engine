@@ -86,16 +86,16 @@ spec = do
       spacesToDigits "p pp    " `shouldBe` "p1pp4"
 
   describe "piecePlacement" $ do
-    it "returns the correct fen string for startPosition" $ do
+    it "returns the correct piece placement for startPosition" $ do
       piecePlacement startPosition `shouldBe` "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR"
 
-    it "returns the correct fen string for afterMove1" $ do
+    it "returns the correct piece placement for afterMove1" $ do
       piecePlacement afterMove1 `shouldBe` "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR"
 
-    it "returns the correct fen string for afterMove2" $ do
+    it "returns the correct piece placement for afterMove2" $ do
       piecePlacement afterMove2 `shouldBe` "rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR"
 
-    it "returns the correct fen string for afterMove3" $ do
+    it "returns the correct piece placement for afterMove3" $ do
       piecePlacement afterMove3 `shouldBe` "rnbqkbnr/pp1ppppp/8/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R"
 
   describe "activeColor" $ do
@@ -105,7 +105,18 @@ spec = do
     it "returns b for afterMove1" $ do
       activeColor afterMove1 `shouldBe` "b"
 
-  -- startPosition {changingValue = ...}
+  describe "castling" $ do
+    it "returns the correct castling string when all are elligible" $ do
+      castling startPosition `shouldBe` "KQkq"
+
+    it "returns the correct castling string when some are elligible" $ do
+      castling startPosition {whiteQueenside = False, blackKingside = False}
+          `shouldBe` "Kq"
+
+    it "returns the correct castling string when none are elligible" $ do
+      castling startPosition {whiteKingside = False, whiteQueenside = False,
+                              blackKingside = False, blackQueenside = False}
+          `shouldBe` "-"
 
   describe "positionToFen" $ do
     it "returns the correct fen string for startPosition" $ do

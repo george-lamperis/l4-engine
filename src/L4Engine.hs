@@ -165,7 +165,13 @@ activeColor pos
     | otherwise      = "b"
 
 castling :: Position -> String
-castling pos = ""
+castling pos
+    | all (== "") [wKing, wQueen, bKing, bQueen] = "-"
+    | otherwise = wKing ++ wQueen ++ bKing ++ bQueen
+    where wKing = if whiteKingside pos then "K" else ""
+          wQueen = if whiteQueenside pos then "Q" else ""
+          bKing = if blackKingside pos then "k" else ""
+          bQueen = if blackQueenside pos then "q" else ""
 
 enPassantSquare :: Position -> String
 enPassantSquare pos = ""
