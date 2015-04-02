@@ -5,7 +5,7 @@ import L4Engine
 
 -- The following test cases are from wikipedia:
 -- http://en.wikipedia.org/wiki/Forsyth%E2%80%93Edwards_Notation
-
+--
 -- starting position:
 -- rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1
 --
@@ -64,5 +64,14 @@ spec = do
       -- MORE!!!
 
   describe "positionToFen" $ do
-    it "returns a fen string for the given Position" $ do
+    it "returns the correct fen string for startPosition" $ do
       positionToFen startPosition `shouldBe` "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+
+    it "returns the correct fen string for afterMove1" $ do
+      positionToFen afterMove1 `shouldBe` "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1"
+
+    it "returns the correct fen string for afterMove2" $ do
+      positionToFen afterMove2 `shouldBe` "rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR w KQkq c6 0 2"
+
+    it "returns the correct fen string for afterMove3" $ do
+      positionToFen afterMove3 `shouldBe` "rnbqkbnr/pp1ppppp/8/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R b KQkq - 1 2"
