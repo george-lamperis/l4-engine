@@ -143,11 +143,13 @@ piecePlacement pos =
     let ranks = [concat x | x <- (chunksOf 8 (pieceLabels pos))]
     in  intercalate "/" (map spacesToDigits ranks)
 
+activeColor :: Position -> String
+activeColor pos
+    | whites_turn pos = "w"
+    | otherwise       = "b"
+
 castling :: Position -> String
 castling pos = ""
-
-activeColor :: Position -> String
-activeColor pos = ""
 
 enPassant :: Position -> String
 enPassant pos = ""

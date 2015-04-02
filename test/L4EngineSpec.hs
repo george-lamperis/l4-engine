@@ -77,6 +77,15 @@ spec = do
     it "returns the correct fen string for afterMove3" $ do
       piecePlacement afterMove3 `shouldBe` "rnbqkbnr/pp1ppppp/8/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R"
 
+  describe "activeColor" $ do
+    it "returns w for the startPosition" $ do
+      activeColor startPosition `shouldBe` "w"
+
+    it "returns b for afterMove1" $ do
+      activeColor afterMove1 `shouldBe` "b"
+
+  -- startPosition {changingValue = ...}
+
   describe "positionToFen" $ do
     it "returns the correct fen string for startPosition" $ do
       positionToFen startPosition `shouldBe` "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
