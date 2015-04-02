@@ -128,24 +128,32 @@ prettyShow pos =
 
 
 -- TODO
--- bitboardToHex
--- boardFromFen
--- boardToFen
--- http://en.wikipedia.org/wiki/Forsyth%E2%80%93Edwards_Notation (test cases)
 -- naive scoring function
 -- compile with -Wall?
--- remove unnecessary imports
+-- remove unnecessary imports/exports
 -- move library source to lib/
+-- indexToSquare
 
 spacesToDigits :: String -> String
 spacesToDigits s =
     concat [if (head x) == ' ' then [intToDigit (length x)] else x | x <- group s]
 
-positionToFen :: Position -> String
-positionToFen pos =
-    -- group
+piecePlacement :: Position -> String
+piecePlacement pos =
     let ranks = [concat x | x <- (chunksOf 8 (pieceLabels pos))]
-    in  concat (map spacesToDigits ranks)
+    in  intercalate "/" (map spacesToDigits ranks)
+
+castling :: Position -> String
+castling pos = ""
+
+activeColor :: Position -> String
+activeColor pos = ""
+
+enPassant :: Position -> String
+enPassant pos = ""
+
+positionToFen :: Position -> String
+positionToFen pos = ""
 
 fenToPosition :: String -> Position
 fenToPosition fen = startPosition
