@@ -60,8 +60,22 @@ spec = do
   describe "spacesToDigits" $ do
     it "replaces any spaces with a digit, the number of consecutive spaces" $ do
       spacesToDigits "pp  pp  " `shouldBe` "pp2pp2"
-      spacesToDigits "pp  pp  " `shouldBe` "pp2pp2"
-      -- MORE!!!
+      spacesToDigits "        " `shouldBe` "8"
+      spacesToDigits "p       " `shouldBe` "p7"
+      spacesToDigits "p pp    " `shouldBe` "p1pp4"
+
+  describe "piecePlacement" $ do
+    it "returns the correct fen string for startPosition" $ do
+      piecePlacement startPosition `shouldBe` "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR"
+
+    it "returns the correct fen string for afterMove1" $ do
+      piecePlacement afterMove1 `shouldBe` "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR"
+
+    it "returns the correct fen string for afterMove2" $ do
+      piecePlacement afterMove2 `shouldBe` "rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR"
+
+    it "returns the correct fen string for afterMove3" $ do
+      piecePlacement afterMove3 `shouldBe` "rnbqkbnr/pp1ppppp/8/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R"
 
   describe "positionToFen" $ do
     it "returns the correct fen string for startPosition" $ do
