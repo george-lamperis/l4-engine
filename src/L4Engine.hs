@@ -4,8 +4,8 @@ import Data.Word (Word64)
 import Data.Bits
 import Data.List
 import Data.List.Split
+import Data.Char
 import Numeric (showHex)
-import Text.Printf
 
 type Bitboard = Word64
 
@@ -133,6 +133,20 @@ prettyShow pos =
 -- boardToFen
 -- http://en.wikipedia.org/wiki/Forsyth%E2%80%93Edwards_Notation (test cases)
 -- naive scoring function
+-- compile with -Wall?
+-- remove unnecessary imports
+-- move library source to lib/
+
+spacesToDigits :: String -> String
+spacesToDigits s =
+    concat [if (head x) == ' ' then [intToDigit (length x)] else x | x <- group s]
 
 positionToFen :: Position -> String
-positionToFen pos = ""
+positionToFen pos =
+    -- group
+    let ranks = [concat x | x <- (chunksOf 8 (pieceLabels pos))]
+    in  concat (map spacesToDigits ranks)
+
+fenToPosition :: String -> Position
+fenToPosition fen = startPosition
+
