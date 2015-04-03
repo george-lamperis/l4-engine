@@ -148,7 +148,8 @@ prettyShow pos =
 -- compile with -Wall?
 -- remove unnecessary imports/exports
 -- move library source to lib/
--- indexToSquare
+-- test suite organization?
+-- Bit trick in enPassantSquare: make it safe. In a function?
 
 spacesToDigits :: String -> String
 spacesToDigits s =
@@ -173,12 +174,24 @@ castling pos
           bKing = if blackKingside pos then "k" else ""
           bQueen = if blackQueenside pos then "q" else ""
 
+indexToSquare :: Int -> String
+indexToSquare idx =
+    let rank = show ((idx `div` 8) + 1)
+        file = chr (idx `mod` 8 + ord 'a') :[]
+    in  file ++ rank
+
 enPassantSquare :: Position -> String
-enPassantSquare pos = ""
+enPassantSquare pos
+    | enPassant pos == 0 = "-"
+    | otherwise = indexToSquare (popCount (enPassant pos - 1))  -- idx of set bit
 
 positionToFen :: Position -> String
-positionToFen pos = ""
+positionToFen pos = (piecePlacement pos) ++ " "
+                 ++ (activeColor pos) ++ " "
+                 ++ (castling pos) ++ " "
+                 ++ (enPassantSquare pos) ++ " "
+                 ++ show (halfMove pos) ++ " "
+                 ++ show (fullMove pos)
 
 fenToPosition :: String -> Position
 fenToPosition fen = startPosition
-

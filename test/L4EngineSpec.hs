@@ -20,7 +20,7 @@ afterMove1 = Position {pawns     = 0x00ff00001000ef00,
                        kings     = 0x1000000000000010,
                        black     = 0xffff000000000000,
                        white     = 0x000000001000efff,
-                       enPassant = 0x0000000000000000, -- TODO
+                       enPassant = 0x0000000000100000,
                        whiteKingside  = True,
                        whiteQueenside = True,
                        blackKingside  = True,
@@ -41,7 +41,7 @@ afterMove2 = Position {pawns     = 0x00fb00041000ef00,
                        kings     = 0x1000000000000010,
                        black     = 0xfffb000400000000,
                        white     = 0x000000001000efff,
-                       enPassant = 0x0000000000000000, -- TODO
+                       enPassant = 0x0000040000000000,
                        whiteKingside  = True,
                        whiteQueenside = True,
                        blackKingside  = True,
@@ -62,7 +62,7 @@ afterMove3 = Position {pawns     = 0x00fb00041000ef00,
                        kings     = 0x1000000000000010,
                        black     = 0xfffb000400000000,
                        white     = 0x000000001020efbf,
-                       enPassant = 0x0000000000000000, -- TODO
+                       enPassant = 0x0000000000000000,
                        whiteKingside  = True,
                        whiteQueenside = True,
                        blackKingside  = True,
@@ -117,6 +117,27 @@ spec = do
       castling startPosition {whiteKingside = False, whiteQueenside = False,
                               blackKingside = False, blackQueenside = False}
           `shouldBe` "-"
+
+  describe "indexToSquare" $ do
+    it "returns the square corresponding to the index" $ do
+      indexToSquare 0 `shouldBe` "a1"
+      indexToSquare 63 `shouldBe` "h8"
+      indexToSquare 12 `shouldBe` "e2"
+      indexToSquare 47 `shouldBe` "h6"
+      indexToSquare 9 `shouldBe` "b2"
+
+  describe "enPassantSquare" $ do
+    it "returns the correct en passant square for startPosition" $ do
+      enPassantSquare startPosition `shouldBe` "-"
+
+    it "returns the correct en passant square for afterMove1" $ do
+      enPassantSquare afterMove1 `shouldBe` "e3"
+
+    it "returns the correct en passant square for afterMove2" $ do
+      enPassantSquare afterMove2 `shouldBe` "c6"
+
+    it "returns the correct en passant square for afterMove3" $ do
+      enPassantSquare afterMove3 `shouldBe` "-"
 
   describe "positionToFen" $ do
     it "returns the correct fen string for startPosition" $ do
